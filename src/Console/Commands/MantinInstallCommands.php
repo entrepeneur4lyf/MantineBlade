@@ -41,7 +41,7 @@ class MantineInstallCommand extends Command
         Artisan::call('view:clear');
 
         $this->info("\n✅ Installation complete!");
-        $this->info("Run `{$this->getDevCommand($packageManagerCommand)}` to start development server");
+        $this->info("\nRun `{$this->getDevCommand($packageManagerCommand)}` to start development server");
     }
 
     protected function installPhpDependencies()
@@ -73,9 +73,10 @@ class MantineInstallCommand extends Command
             "@mantine/spotlight",
             "@mantine/modals",
             "@mantine/nprogress",
-            "@emotion/react",
             "react",
-            "react-dom"
+            "react-dom",
+            "@mingle/mingleReact",
+            "axios"
         ];
 
         $devDependencies = [
@@ -110,12 +111,12 @@ class MantineInstallCommand extends Command
     protected function setupViteConfig()
     {
         $viteConfigPath = base_path('vite.config.js');
-        $stub = File::get(__DIR__ . '/../../stubs/vite.config.js');
+        $stub = File::get(__DIR__ . '/../../../stubs/vite.config.js');
 
         if (!File::exists($viteConfigPath)) {
             File::put($viteConfigPath, $stub);
         } else {
-            // Modify existing config to include React plugin
+            // Modify existing config to include React plugin and Mingle alias
             $config = File::get($viteConfigPath);
             if (!str_contains($config, '@vitejs/plugin-react')) {
                 // Add React plugin to existing config
@@ -129,6 +130,19 @@ class MantineInstallCommand extends Command
                     "plugins: [\n\t\treact(),",
                     $config
                 );
+
+                // Add Mingle alias
+                $config = str_replace(
+                    'export default defineConfig({',
+                    "import path from 'path';\n\nexport default defineConfig({",
+                    $config
+                );
+                $config = str_replace(
+                    'export default defineConfig({',
+                    "export default defineConfig({\n\tresolve: {\n\t\talias: {\n\t\t\t\"@mingle\": path.resolve(__dirname, \"/vendor/ijpatricio/mingle/resources/js\"),\n\t\t},\n\t},",
+                    $config
+                );
+
                 File::put($viteConfigPath, $config);
             }
         }
@@ -139,27 +153,65 @@ class MantineInstallCommand extends Command
         $this->info("\nPublishing configuration...");
         
         Artisan::call('vendor:publish', [
-            '--tag' => 'mantine-blade-config'
+            '--tag' => 'mantine.config'
         ]);
     }
 
     protected function copyStubs()
     {
-        $this->info("\nCopying example components...");
+        $this->info("\nCopying components and stubs...");
 
-        $viewsPath = resource_path('views/vendor/mantine-blade');
-        $componentsPath = app_path('Http/Livewire');
-
-        // Create directories if they don't exist
-        if (!File::exists($viewsPath)) {
-            File::makeDirectory($viewsPath, 0755, true);
+        // Create necessary directories
+        $jsPath = resource_path('js');
+        if (!File::exists($jsPath)) {
+            File::makeDirectory($jsPath, 0755, true);
         }
+
+        // Copy JS files
+        File::copy(__DIR__ . '/../../../stubs/js/app.js', resource_path('js/app.js'));
+        File::copy(__DIR__ . '/../../../stubs/js/bootstrap.js', resource_path('js/bootstrap.js'));
+
+        // Copy React components
+        $componentsPath = resource_path('js/Components');
         if (!File::exists($componentsPath)) {
             File::makeDirectory($componentsPath, 0755, true);
         }
 
-        // Copy example components
-        // TODO: Add actual stub files
+        $stubsPath = __DIR__ . '/../../../stubs/js/Components';
+        if (File::exists($stubsPath)) {
+            File::copyDirectory($stubsPath, $componentsPath);
+        }
+
+        // Publish views
+        Artisan::call('vendor:publish', [
+            '--tag' => 'mantine.views'
+        ]);
+
+        // Create postcss.config.js if it doesn't exist
+        $postcssConfig = base_path('postcss.config.js');
+        if (!File::exists($postcssConfig)) {
+            File::put($postcssConfig, $this->getPostCssConfig());
+        }
+    }
+
+    protected function getPostCssConfig(): string
+    {
+        return <<<'JS'
+module.exports = {
+    plugins: {
+        'postcss-preset-mantine': {},
+        'postcss-simple-vars': {
+            variables: {
+                'mantine-breakpoint-xs': '36em',
+                'mantine-breakpoint-sm': '48em',
+                'mantine-breakpoint-md': '62em',
+                'mantine-breakpoint-lg': '75em',
+                'mantine-breakpoint-xl': '88em',
+            },
+        },
+    },
+};
+JS;
     }
 
     protected function askForPackageInstaller(): string
