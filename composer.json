@@ -1,0 +1,40 @@
+{
+    "name": "phpstack/mantine-blade",
+    "description": "A Lareavel Livewire 3 Component library based on Mantine",
+    "type": "library",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "Shawn McAllister",
+            "email": "dev@phpstack.dev"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^11.30",
+        "ijpatricio/mingle": "^0.0.18",
+        "jfcherng/php-diff": "^6.16",
+        "laravel/prompts": "^0.3.1",
+        "blade-ui-kit/blade-icons": "^1.7",        
+        "ryangjchandler/blade-tabler-icons": "^2.3"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "MantineBlade\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MantineBlade\\MantineBladeServiceProvider"
+            ],
+            "aliases": {
+                "MantineBlade": "MantineBlade\\Facades\\MantineBlade"
+            }
+        }
+    },
+    "minimum-stability": "stable"
+}
