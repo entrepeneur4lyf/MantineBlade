@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use MantineBlade\Components\AppShell;
 use MantineBlade\Components\AspectRatio;
+use MantineBlade\Components\Autocomplete;
 use MantineBlade\Components\Button;
 use MantineBlade\Components\Center;
 use MantineBlade\Components\Checkbox;
@@ -32,6 +33,8 @@ use MantineBlade\Components\Slider;
 use MantineBlade\Components\Space;
 use MantineBlade\Components\Stack;
 use MantineBlade\Components\SwitchInput;
+use MantineBlade\Components\TextInput;
+use MantineBlade\Components\Textarea;
 use MantineBlade\Console\Commands\MantineInstallCommand;
 
 class MantineBladeServiceProvider extends ServiceProvider
@@ -75,6 +78,7 @@ class MantineBladeServiceProvider extends ServiceProvider
         $this->loadViewComponentsAs('mantine', [
             Button::class,
             AspectRatio::class,
+            Autocomplete::class,
             Center::class,
             Checkbox::class,
             Chip::class,
@@ -108,6 +112,8 @@ class MantineBladeServiceProvider extends ServiceProvider
             Stack::class,
             SwitchInput::class,
             SwitchInput\Group::class,
+            TextInput::class,
+            Textarea::class,
             AppShell::class,
             AppShell\Header::class,
             AppShell\Navbar::class,
