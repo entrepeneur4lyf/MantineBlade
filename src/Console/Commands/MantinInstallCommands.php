@@ -94,7 +94,7 @@ class MantineInstallCommand extends Command
             "@tiptap/extension-task-item",
             "@tiptap/extension-task-list",
             "@tiptap/extension-mention",
-            "@tiptap/extension-emoji",
+            "@tiptap/extension-bold",
             "@tiptap/extension-underline",
             "@tiptap/extension-code",
             "@tiptap/extension-image",
@@ -128,7 +128,7 @@ class MantineInstallCommand extends Command
             "react-querybuilder",
             "@react-querybuilder/mantine",
             "@gfazioli/mantine-flip",
-            "mantine-react-table@beta",
+            "mantine-react-table",
             "mantine-contextmenu",
             "clsx",
             "axios"
