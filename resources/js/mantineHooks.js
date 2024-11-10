@@ -150,7 +150,36 @@ const MANTINE_HOOKS = {
     windowScroll: useWindowScroll
 };
 
+// Initialize hooks when requested
+document.addEventListener('mantine-init-hooks', (event) => {
+    const { hooks, configs } = event.detail;
+    const component = window.Livewire.find(event.target.closest('[wire\\:id]').getAttribute('wire:id'));
+
+    hooks.forEach(hookName => {
+        setupMantineHook(hookName, event.target, component);
+    });
+});
+
+// Cleanup hooks when requested
+document.addEventListener('mantine-destroy-hooks', (event) => {
+    const el = event.target;
+    if (activeHooks.has(el)) {
+        const cleanup = activeHooks.get(el);
+        cleanup?.();
+        activeHooks.delete(el);
+    }
+});
+
+// Track active hooks for cleanup
+const activeHooks = new Map();
+
 export function setupMantineHook(hookName, el, component) {
+    // Cleanup any existing hook
+    if (activeHooks.has(el)) {
+        const cleanup = activeHooks.get(el);
+        cleanup?.();
+        activeHooks.delete(el);
+    }
     if (!MANTINE_HOOKS[hookName]) {
         console.warn(`Mantine hook '${hookName}' not found`);
         return;
@@ -165,5 +194,12 @@ export function setupMantineHook(hookName, el, component) {
         : undefined;
 
     // Apply the hook with configuration and handler
-    return MANTINE_HOOKS[hookName](config, handler);
+    const hookResult = MANTINE_HOOKS[hookName](config, handler);
+
+    // Store cleanup function if returned
+    if (typeof hookResult === 'function') {
+        activeHooks.set(el, hookResult);
+    }
+
+    return hookResult;
 }

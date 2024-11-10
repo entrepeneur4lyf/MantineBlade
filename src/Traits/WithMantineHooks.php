@@ -117,6 +117,16 @@ trait WithMantineHooks
     {
         $this->mantineHooks = [];
         $this->mantineHookConfigs = [];
+
+        // Initialize hooks after component mount
+        $this->onMantineMount(function() {
+            $this->mountMantineHooks();
+        });
+
+        // Cleanup hooks before component unmount
+        $this->onMantineUnmount(function() {
+            $this->destroyMantineHooks();
+        });
     }
 
     /**
