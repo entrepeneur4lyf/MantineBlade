@@ -11,6 +11,13 @@ namespace MantineBlade\Components;
  * Requires the ueberdosis/tiptap-php package for server-side content handling:
  * composer require ueberdosis/tiptap-php
  *
+ * Features:
+ * - Text formatting and alignment
+ * - Character count and limits
+ * - Placeholder support
+ * - Typography enhancements
+ * - Undo/Redo functionality
+ * 
  * @link https://mantine.dev/x/tiptap/
  * @link https://github.com/ueberdosis/tiptap-php
  *
@@ -42,6 +49,10 @@ class RichTextEditor extends MantineComponent
         public mixed $classNames = null,
         public mixed $styles = null,
         public mixed $sanitize = false,
+        public mixed $placeholder = null,
+        public mixed $characterCount = false,
+        public mixed $maxLength = null,
+        public mixed $textAlign = true,
     ) {
         parent::__construct();
 

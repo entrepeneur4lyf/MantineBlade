@@ -65,10 +65,16 @@ class ExampleRichTextEditor extends Component
     {
         return <<<'blade'
             <div>
-                <!-- Basic Editor -->
+                <!-- Basic Editor with Character Count -->
                 <div class="mb-8">
-                    <x-mantine-title order="2" class="mb-4">Basic Editor</x-mantine-title>
-                    <x-mantine-rich-text-editor :content="$content">
+                    <x-mantine-title order="2" class="mb-4">Basic Editor with Features</x-mantine-title>
+                    <x-mantine-rich-text-editor 
+                        :content="$content"
+                        :placeholder="'Start typing your content here...'"
+                        :character-count="true"
+                        :max-length="1000"
+                        :text-align="true"
+                    >
                         <x-mantine-rich-text-editor-toolbar>
                             <x-mantine-rich-text-editor-controls-group>
                                 <x-mantine-rich-text-editor-control name="bold" />
@@ -87,6 +93,18 @@ class ExampleRichTextEditor extends Component
                                 <x-mantine-rich-text-editor-control name="bulletList" />
                                 <x-mantine-rich-text-editor-control name="orderedList" />
                                 <x-mantine-rich-text-editor-control name="link" />
+                            </x-mantine-rich-text-editor-controls-group>
+
+                            <x-mantine-rich-text-editor-controls-group>
+                                <x-mantine-rich-text-editor-control name="alignLeft" />
+                                <x-mantine-rich-text-editor-control name="alignCenter" />
+                                <x-mantine-rich-text-editor-control name="alignRight" />
+                                <x-mantine-rich-text-editor-control name="alignJustify" />
+                            </x-mantine-rich-text-editor-controls-group>
+
+                            <x-mantine-rich-text-editor-controls-group>
+                                <x-mantine-rich-text-editor-control name="undo" />
+                                <x-mantine-rich-text-editor-control name="redo" />
                             </x-mantine-rich-text-editor-controls-group>
                         </x-mantine-rich-text-editor-toolbar>
 
