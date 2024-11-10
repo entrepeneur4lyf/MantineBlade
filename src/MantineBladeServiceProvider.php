@@ -36,19 +36,16 @@ class MantineBladeServiceProvider extends ServiceProvider
             __DIR__ . '/../config/mantine.php' => config_path('mantine.php'),
         ], 'mantine.config');
 
-        // Views
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mantine');
-        
-        $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/mantine'),
-        ], 'mantine.views');
-
         // Register all components in the MantineBlade\Components namespace
         Blade::componentNamespace('MantineBlade\\Components', 'mantine');
 
-        // Register the @mantineStyles directive
-        Blade::directive('mantineStyles', function () {
-            return '<?php echo view("mantine::styles"); ?>';
-        });
+        // Register Livewire event listeners for Mantine hooks
+        if (class_exists(\Livewire\Livewire::class)) {
+            \Livewire\Livewire::listen('component.initialized', function ($component) {
+                if (in_array(\MantineBlade\Traits\WithMantineHooks::class, class_uses_recursive($component))) {
+                    $component->bootWithMantineHooks();
+                }
+            });
+        }
     }
 }
