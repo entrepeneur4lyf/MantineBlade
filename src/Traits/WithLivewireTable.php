@@ -62,7 +62,7 @@ trait WithLivewireTable
      */
     public function mountWithLivewireTable(): void
     {
-        $this->js('table-event', function($event) {
+        $this->dispatch('table-event', function($event) {
             $this->handleTableEvent($event['type'], $event);
         });
     }

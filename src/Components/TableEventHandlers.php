@@ -31,7 +31,7 @@ class RowSelectionEventHandler implements TableEventHandler {
                 // Handle method calls through Mingle
                 [$component, $method] = explode('.', $this->callback);
                 if (method_exists($component, $method)) {
-                    $this->js($method, ['rows' => $selectedRows]);
+                    $this->dispatch($method, ['rows' => $selectedRows]);
                 }
             } else {
                 // Handle direct event dispatch
