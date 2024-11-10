@@ -4,6 +4,8 @@ namespace MantineBlade\Traits;
 
 trait WithMantineClickOutside
 {
+    use WithMantineHooks;
+
     protected array $clickOutsideHandlers = [];
     protected ?array $clickOutsideEvents = null;
     protected array $clickOutsideNodes = [];
@@ -13,17 +15,20 @@ trait WithMantineClickOutside
      */
     public function onClickOutside(callable $handler, ?array $events = null, array $nodes = []): self
     {
+        $this->registerHook('clickOutside', [
+            'events' => $events,
+            'nodes' => $nodes
+        ]);
+        
         $this->clickOutsideHandlers[] = $handler;
-        $this->clickOutsideEvents = $events;
-        $this->clickOutsideNodes = array_merge($this->clickOutsideNodes, $nodes);
         
         return $this;
     }
 
     /**
-     * Get the click outside configuration for Mingle
+     * Get the click outside configuration
      */
-    public function getClickOutsideConfig(): array
+    protected function getClickOutsideConfig(): array
     {
         return [
             'events' => $this->clickOutsideEvents,
@@ -32,17 +37,7 @@ trait WithMantineClickOutside
     }
 
     /**
-     * Initialize click outside hook for Livewire
-     */
-    public function mountClickOutside(): void
-    {
-        $this->dispatchBrowserEvent('mantine-init-click-outside', [
-            'config' => $this->getClickOutsideConfig()
-        ]);
-    }
-
-    /**
-     * Handle click outside event from Mingle
+     * Handle click outside event
      */
     public function handleClickOutside(): void
     {

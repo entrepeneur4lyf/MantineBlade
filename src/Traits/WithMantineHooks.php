@@ -68,3 +68,40 @@ trait WithMantineHooks
         }
     }
 }
+<?php
+
+namespace MantineBlade\Traits;
+
+trait WithMantineHooks
+{
+    protected array $mantineHooks = [];
+    
+    /**
+     * Register a Mantine hook
+     */
+    protected function registerHook(string $hookName, array $config = []): void
+    {
+        $this->mantineHooks[$hookName] = $config;
+    }
+
+    /**
+     * Initialize all registered Mantine hooks
+     */
+    public function mountMantineHooks(): void
+    {
+        foreach ($this->mantineHooks as $hookName => $config) {
+            $this->dispatchBrowserEvent('mantine-init-hook', [
+                'hook' => $hookName,
+                'config' => $config
+            ]);
+        }
+    }
+
+    /**
+     * Get configuration for a specific hook
+     */
+    public function getHookConfig(string $hookName): ?array
+    {
+        return $this->mantineHooks[$hookName] ?? null;
+    }
+}
