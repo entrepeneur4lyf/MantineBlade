@@ -11,6 +11,7 @@
     ],
     "require": {
         "illuminate/support": "^11.30",
+        "illuminate/foundation": "^11.30",
         "ijpatricio/mingle": "^0.0.18",
         "jfcherng/php-diff": "^6.16",
         "laravel/prompts": "^0.3.1",
