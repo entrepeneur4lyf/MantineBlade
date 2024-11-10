@@ -1,6 +1,11 @@
 import { 
     useCallbackRef,
     useClickOutside,
+    useFormErrors,
+    useFormList,
+    useFormStatus,
+    useFormValues,
+    useFormWatch,
     useClipboard,
     useColorScheme,
     useCounter,
@@ -72,6 +77,11 @@ import {
 const MANTINE_HOOKS = {
     callbackRef: useCallbackRef,
     clickOutside: useClickOutside,
+    formErrors: useFormErrors,
+    formList: useFormList,
+    formStatus: useFormStatus,
+    formValues: useFormValues,
+    formWatch: useFormWatch,
     clipboard: useClipboard,
     colorScheme: useColorScheme,
     counter: useCounter,
