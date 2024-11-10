@@ -2,6 +2,47 @@
 
 namespace MantineBlade\Components;
 
+/**
+ * NativeSelect component for creating native browser select inputs.
+ *
+ * The NativeSelect component renders a native HTML select element with Mantine styling.
+ * It provides a lightweight alternative to Select component when you need native mobile experience.
+ *
+ * @see https://mantine.dev/core/native-select/
+ *
+ * @example Basic usage
+ * ```blade
+ * <x-mantine-native-select
+ *     label="Select your country"
+ *     :data="['USA', 'Canada', 'Mexico']"
+ *     placeholder="Pick one"
+ * />
+ * ```
+ *
+ * @example With validation and styling
+ * ```blade
+ * <x-mantine-native-select
+ *     :data="$countries"
+ *     label="Country"
+ *     :required="true"
+ *     :with-asterisk="true"
+ *     :error="$errors->first('country')"
+ *     :size="'lg'"
+ *     :radius="'md'"
+ * />
+ * ```
+ *
+ * @example With sections and custom styling
+ * ```blade
+ * <x-mantine-native-select
+ *     :data="$options"
+ *     :left-section="'🌍'"
+ *     :variant="'filled'"
+ *     :disabled="$isDisabled"
+ *     description="Select your preferred location"
+ * />
+ * ```
+ */
 class NativeSelect extends MantineComponent
 {
     /**
