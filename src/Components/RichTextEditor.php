@@ -7,8 +7,12 @@ namespace MantineBlade\Components;
  *
  * A TipTap-based rich text editor component that provides a familiar editing experience.
  * Supports various text formatting options, lists, links, and other extensions.
+ * 
+ * Requires the ueberdosis/tiptap-php package for server-side content handling:
+ * composer require ueberdosis/tiptap-php
  *
  * @link https://mantine.dev/x/tiptap/
+ * @link https://github.com/ueberdosis/tiptap-php
  *
  * @property mixed $editor TipTap editor instance
  * @property mixed $withTypographyStyles Enable/disable default typography styles

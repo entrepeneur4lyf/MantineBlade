@@ -9,6 +9,9 @@ use Livewire\Component;
  *
  * This example demonstrates various configurations and features of the MantineBlade RichTextEditor component.
  * It showcases different formatting options, extensions, and customizations available.
+ * 
+ * Requirements:
+ * - Tiptap PHP package: composer require ueberdosis/tiptap-php
  *
  * Features demonstrated:
  * - Basic text formatting (bold, italic, underline, etc.)
@@ -17,6 +20,7 @@ use Livewire\Component;
  * - Text alignment
  * - Custom controls and icons
  * - Sticky toolbar
+ * - Content sanitization and conversion using Tiptap PHP
  *
  * @see \MantineBlade\Components\RichTextEditor
  * @link https://mantine.dev/x/tiptap/
