@@ -26,10 +26,19 @@ trait WithMantineClickOutside
     public function getClickOutsideConfig(): array
     {
         return [
-            'handlers' => $this->clickOutsideHandlers,
             'events' => $this->clickOutsideEvents,
             'nodes' => $this->clickOutsideNodes,
         ];
+    }
+
+    /**
+     * Initialize click outside hook for Livewire
+     */
+    public function mountClickOutside(): void
+    {
+        $this->dispatchBrowserEvent('mantine-init-click-outside', [
+            'config' => $this->getClickOutsideConfig()
+        ]);
     }
 
     /**
