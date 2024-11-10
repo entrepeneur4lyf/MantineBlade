@@ -173,14 +173,6 @@ class MantineInstallCommand extends Command
 
         // Copy the stub vite config directly
         File::copy(__DIR__ . '/../../../stubs/vite.config.js', $viteConfigPath);
-
-        // Add mingles import and configuration
-        $minglesImport = "\nimport findMingles from './vendor/ijpatricio/mingle/resources/js/autoImport.js'\n";
-        $minglesConfig = "const mingles = findMingles('resources/js')\n";
-        $minglesLog = "// Optional: Output the mingles to the console, for a visual check\n";
-        $minglesLogLine = "console.log('Auto-importing mingles:', mingles)\n\n";
-
-        File::prepend($viteConfigPath, $minglesImport . $minglesConfig . $minglesLog . $minglesLogLine);
     }
 
     protected function publishConfig()
