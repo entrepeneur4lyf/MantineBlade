@@ -171,70 +171,8 @@ class MantineInstallCommand extends Command
             throw new RuntimeException('Vite configuration file not found. Please install Livewire first.');
         }
 
-        $config = File::get($viteConfigPath);
-        
-        // Only add React plugin if not already present
-        if (!str_contains($config, '@vitejs/plugin-react')) {
-            // Add React import if needed
-            if (!str_contains($config, 'import react')) {
-                $config = preg_replace(
-                    '/^(import .+;\n*)/m',
-                    "$1import react from '@vitejs/plugin-react';\n",
-                    $config
-                );
-            }
-            
-            // Add React to plugins array
-            $config = preg_replace(
-                '/(plugins:\s*\[)/',
-                "$1\n        react(),",
-                $config
-            );
-        }
-
-        // Add path import if needed for alias
-        if (!str_contains($config, 'import path')) {
-            $config = preg_replace(
-                '/^(import .+;\n*)/m',
-                "$1import path from 'path';\n",
-                $config
-            );
-        }
-
-        // Add Mingle alias if not present
-        if (!str_contains($config, '@mingle')) {
-            // Check if resolve section exists
-            if (!str_contains($config, 'resolve:')) {
-                // Add resolve section before plugins
-                $config = preg_replace(
-                    '/(plugins:\s*\[)/',
-                    "resolve: {\n        alias: {\n            '@mingle': path.resolve(__dirname, '/vendor/ijpatricio/mingle/resources/js'),\n        },\n    },\n\n    $1",
-                    $config
-                );
-            } else {
-                // Add to existing resolve.alias section
-                $config = preg_replace(
-                    '/(resolve:\s*{(?:[^}]+alias:\s*{[^}]*})?[^}]*})/s',
-                    function ($matches) {
-                        if (str_contains($matches[1], 'alias:')) {
-                            return preg_replace(
-                                '/(alias:\s*{)/',
-                                "$1\n            '@mingle': path.resolve(__dirname, '/vendor/ijpatricio/mingle/resources/js'),",
-                                $matches[1]
-                            );
-                        }
-                        return str_replace(
-                            'resolve: {',
-                            "resolve: {\n        alias: {\n            '@mingle': path.resolve(__dirname, '/vendor/ijpatricio/mingle/resources/js'),\n        },",
-                            $matches[1]
-                        );
-                    },
-                    $config
-                );
-            }
-        }
-
-        File::put($viteConfigPath, $config);
+        // Copy the stub vite config directly
+        File::copy(__DIR__ . '/../../../stubs/vite.config.js', $viteConfigPath);
     }
 
     protected function publishConfig()
