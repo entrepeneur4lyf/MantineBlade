@@ -3,6 +3,9 @@
 namespace MantineBlade\Components;
 
 use InvalidArgumentException;
+use Livewire\Component;
+use Livewire\Attributes\Reactive;
+use Illuminate\Support\Collection;
 
 /**
  * Advanced data table component with rich features and interactivity.
@@ -54,7 +57,7 @@ use InvalidArgumentException;
  * />
  * ```
  */
-class ReactTable extends MantineComponent
+class ReactTable extends Component
 {
     /**
      * Default table feature configuration
@@ -177,9 +180,15 @@ class ReactTable extends MantineComponent
         'exportDisplayMode' => ['menu', 'buttons', 'custom']
     ];
 
-    public function __construct(
-        public array|null $data = null,
-        public array|null $columns = null,
+    #[Reactive]
+    public array|Collection|null $data = null;
+    
+    #[Reactive]
+    public array|null $columns = null;
+
+    public function mount(
+        array|Collection|null $data = null,
+        array|null $columns = null,
         ?array $features = null,
         public ?TableEventHandler $onRowSelectionChange = null,
         public ?TableEventHandler $onColumnFiltersChange = null,
@@ -200,7 +209,8 @@ class ReactTable extends MantineComponent
         public ?int $pageCount = null,
         public ?int $rowCount = null
     ) {
-        parent::__construct();
+        $this->data = $data instanceof Collection ? $data->toArray() : $data;
+        $this->columns = $columns;
 
         if ($features !== null) {
             $this->configureFeatures($features);
