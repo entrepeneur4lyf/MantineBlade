@@ -191,19 +191,41 @@ class MantineInstallCommand extends Command
         }
 
         // Update plugins section
-        $content = preg_replace(
-            '/plugins:\s*\[(.*?)\]/s',
-            'plugins: [
-                react(),
-                laravel({
+        if (preg_match('/plugins:\s*\[(.*?)\]/s', $content, $matches)) {
+            $existingPlugins = $matches[1];
+            
+            // Only add react() if not already present
+            if (!str_contains($existingPlugins, 'react()')) {
+                $existingPlugins = 'react(),' . $existingPlugins;
+            }
+            
+            // Update laravel plugin or add it if not present
+            if (str_contains($existingPlugins, 'laravel(')) {
+                $content = preg_replace(
+                    '/laravel\({[^}]+}\)/s',
+                    'laravel({
+                        input: [
+                            ...mingles,
+                        ],
+                        refresh: true,
+                    })',
+                    $content
+                );
+            } else {
+                $existingPlugins .= ',laravel({
                     input: [
                         ...mingles,
                     ],
                     refresh: true,
-                }),
-            ]',
-            $content
-        );
+                })';
+            }
+            
+            $content = preg_replace(
+                '/plugins:\s*\[(.*?)\]/s',
+                'plugins: [' . $existingPlugins . ']',
+                $content
+            );
+        }
 
         File::put($viteConfigPath, $content);
     }
