@@ -16,12 +16,12 @@
         "laravel/prompts": "^0.3.1",
         "blade-ui-kit/blade-icons": "^1.7",        
         "ryangjchandler/blade-tabler-icons": "^2.3",
-        "ueberdosis/tiptap-php": "^1.4",
-        "livewire/livewire": "^3.0"
+        "ueberdosis/tiptap-php": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.2",
-        "pestphp/pest": "^3.5"
+        "pestphp/pest": "^3.5",
+        "livewire/livewire": "^3.0"
     },
     "license": "MIT",
     "autoload": {
