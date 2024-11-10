@@ -135,6 +135,29 @@ class ExampleRichTextEditor extends Component
                     </x-mantine-rich-text-editor>
                 </div>
 
+                <!-- YouTube Embed Example -->
+                <div class="mb-8">
+                    <x-mantine-title order="2" class="mb-4">YouTube Embed Support</x-mantine-title>
+                    <x-mantine-rich-text-editor
+                        :content="$content"
+                        :youtube-embed="true"
+                        :youtube-width="800"
+                        :youtube-height="450"
+                        :youtube-controls="true"
+                        :youtube-modest-branding="true"
+                    >
+                        <x-mantine-rich-text-editor-toolbar>
+                            <x-mantine-rich-text-editor-controls-group>
+                                <x-mantine-rich-text-editor-control name="bold" />
+                                <x-mantine-rich-text-editor-control name="italic" />
+                                <x-mantine-rich-text-editor-control name="youtube" />
+                            </x-mantine-rich-text-editor-controls-group>
+                        </x-mantine-rich-text-editor-toolbar>
+
+                        <x-mantine-rich-text-editor-content />
+                    </x-mantine-rich-text-editor>
+                </div>
+
                 <!-- Custom Controls Example -->
                 <div>
                     <x-mantine-title order="2" class="mb-4">Custom Controls</x-mantine-title>

@@ -53,6 +53,12 @@ class RichTextEditor extends MantineComponent
         public mixed $characterCount = false,
         public mixed $maxLength = null,
         public mixed $textAlign = true,
+        public mixed $youtubeEmbed = false,
+        public mixed $youtubeWidth = 640,
+        public mixed $youtubeHeight = 480,
+        public mixed $youtubeControls = true,
+        public mixed $youtubeNoCookie = false,
+        public mixed $youtubeModestBranding = false,
     ) {
         parent::__construct();
 
@@ -79,6 +85,12 @@ class RichTextEditor extends MantineComponent
             'stickyOffset' => $stickyOffset,
             'classNames' => $classNames,
             'styles' => $styles,
+            'youtubeEmbed' => $youtubeEmbed,
+            'youtubeWidth' => $youtubeWidth,
+            'youtubeHeight' => $youtubeHeight,
+            'youtubeControls' => $youtubeControls,
+            'youtubeNoCookie' => $youtubeNoCookie,
+            'youtubeModestBranding' => $youtubeModestBranding,
         ];
     }
 
