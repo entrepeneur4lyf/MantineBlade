@@ -9,6 +9,7 @@ namespace MantineBlade\Components;
  * a drag-and-drop interface. Based on @react-querybuilder/mantine.
  *
  * @link https://react-querybuilder.js.org/
+ * @link https://www.npmjs.com/package/@react-querybuilder/mantine
  *
  * @property array $fields Array of field definitions
  * @property mixed $query Current query state
