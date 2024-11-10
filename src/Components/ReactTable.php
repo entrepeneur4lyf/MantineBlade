@@ -2,6 +2,8 @@
 
 namespace MantineBlade\Components;
 
+use InvalidArgumentException;
+
 /**
  * Advanced data table component with rich features and interactivity.
  *
@@ -54,31 +56,145 @@ namespace MantineBlade\Components;
  */
 class ReactTable extends MantineComponent
 {
+    /**
+     * Default table feature configuration
+     * 
+     * @var array<string, bool|string>
+     */
+    protected array $tableFeatures = [
+        'enableColumnFiltering' => false,
+        'enableColumnFilterModes' => false,
+        'enableColumnOrdering' => false,
+        'enableColumnPinning' => false,
+        'enableColumnResizing' => false,
+        'enableRowSelection' => false,
+        'enableMultiRowSelection' => false,
+        'enablePagination' => true,
+        'paginateExpandedRows' => true,
+        'enableSorting' => true,
+        'enableMultiSort' => false,
+        'selectDisplayMode' => 'checkbox',
+        'selectAllMode' => 'page',
+        'layoutMode' => 'semantic'
+    ];
+
+    /**
+     * Allowed configuration keys with their type constraints
+     * 
+     * @var array<string, string|array<string>>
+     */
+    private const ALLOWED_FEATURES = [
+        'enableColumnFiltering' => 'bool',
+        'enableColumnFilterModes' => 'bool',
+        'enableColumnOrdering' => 'bool',
+        'enableColumnPinning' => 'bool',
+        'enableColumnResizing' => 'bool',
+        'enableRowSelection' => 'bool',
+        'enableMultiRowSelection' => 'bool',
+        'enablePagination' => 'bool',
+        'paginateExpandedRows' => 'bool',
+        'enableSorting' => 'bool',
+        'enableMultiSort' => 'bool',
+        'selectDisplayMode' => ['checkbox', 'radio', 'switch'],
+        'selectAllMode' => ['page', 'all'],
+        'layoutMode' => ['semantic', 'grid']
+    ];
+
     public function __construct(
-        public mixed $data = null,
-        public mixed $columns = null,
-        public mixed $enableColumnFiltering = null,
-        public mixed $enableColumnOrdering = null,
-        public mixed $enableColumnPinning = null,
-        public mixed $enableRowSelection = null,
-        public mixed $enablePagination = null,
-        public mixed $enableSorting = null,
+        public array|null $data = null,
+        public array|null $columns = null,
+        public array|null $state = null,
+        ?array $features = null,
         public mixed $onRowSelectionChange = null,
-        public mixed $state = null,
     ) {
         parent::__construct();
 
-        $this->props = [
-            'data' => $data,
-            'columns' => $columns,
-            'enableColumnFiltering' => $enableColumnFiltering,
-            'enableColumnOrdering' => $enableColumnOrdering,
-            'enableColumnPinning' => $enableColumnPinning,
-            'enableRowSelection' => $enableRowSelection,
-            'enablePagination' => $enablePagination,
-            'enableSorting' => $enableSorting,
-            'onRowSelectionChange' => $onRowSelectionChange,
-            'state' => $state,
+        if ($features !== null) {
+            $this->configureFeatures($features);
+        }
+
+        $this->props = array_merge(
+            $this->tableFeatures,
+            [
+                'data' => $data,
+                'columns' => $columns,
+                'state' => $state,
+                'onRowSelectionChange' => $onRowSelectionChange,
+            ]
+        );
+    }
+
+    /**
+     * Configure table features with validation
+     * 
+     * @param array<string, bool|string> $features
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function configureFeatures(array $features): self
+    {
+        foreach ($features as $key => $value) {
+            if (!array_key_exists($key, self::ALLOWED_FEATURES)) {
+                throw new InvalidArgumentException(
+                    "Invalid table feature configuration key: {$key}"
+                );
+            }
+
+            $expectedType = self::ALLOWED_FEATURES[$key];
+            
+            if (is_array($expectedType)) {
+                if (!in_array($value, $expectedType, true)) {
+                    throw new InvalidArgumentException(
+                        "Invalid value for {$key}. Allowed values: " . 
+                        implode(', ', $expectedType)
+                    );
+                }
+            } elseif ($expectedType === 'bool' && !is_bool($value)) {
+                throw new InvalidArgumentException(
+                    "Table feature {$key} must be a boolean"
+                );
+            }
+
+            $this->tableFeatures[$key] = $value;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get current table feature configuration
+     * 
+     * @return array<string, bool|string>
+     */
+    public function getFeatures(): array
+    {
+        return $this->tableFeatures;
+    }
+
+    /**
+     * Reset table features to default configuration
+     * 
+     * @return $this
+     */
+    public function resetFeatures(): self
+    {
+        $this->tableFeatures = [
+            'enableColumnFiltering' => false,
+            'enableColumnFilterModes' => false,
+            'enableColumnOrdering' => false,
+            'enableColumnPinning' => false,
+            'enableColumnResizing' => false,
+            'enableRowSelection' => false,
+            'enableMultiRowSelection' => false,
+            'enablePagination' => true,
+            'paginateExpandedRows' => true,
+            'enableSorting' => true,
+            'enableMultiSort' => false,
+            'selectDisplayMode' => 'checkbox',
+            'selectAllMode' => 'page',
+            'layoutMode' => 'semantic'
         ];
+
+        return $this;
     }
 }
