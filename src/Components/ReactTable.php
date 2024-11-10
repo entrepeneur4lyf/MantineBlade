@@ -231,14 +231,14 @@ class ReactTable extends Component
                 'data' => $this->data,
                 'columns' => $this->columns,
                 'state' => $this->state,
-                'onRowSelectionChange' => fn($rows) => $this->dispatch('table-event', ['type' => 'rowSelection', 'data' => $rows]),
-                'onColumnFiltersChange' => fn($filters) => $this->dispatch('table-event', ['type' => 'columnFilters', 'data' => $filters]),
-                'onGlobalFilterChange' => fn($filter) => $this->dispatch('table-event', ['type' => 'globalFilter', 'data' => $filter]),
-                'onPaginationChange' => fn($pagination) => $this->dispatch('table-event', ['type' => 'pagination', 'data' => $pagination]),
-                'onSortingChange' => fn($sorting) => $this->dispatch('table-event', ['type' => 'sorting', 'data' => $sorting]),
-                'onGroupingChange' => fn($grouping) => $this->dispatch('table-event', ['type' => 'grouping', 'data' => $grouping]),
-                'onColumnVisibilityChange' => fn($visibility) => $this->dispatch('table-event', ['type' => 'columnVisibility', 'data' => $visibility]),
-                'onRowExpansionChange' => fn($expansion) => $this->dispatch('table-event', ['type' => 'rowExpansion', 'data' => $expansion]),
+                'onRowSelectionChange' => fn($rows) => $this->js('table-event', ['type' => 'rowSelection', 'data' => $rows]),
+                'onColumnFiltersChange' => fn($filters) => $this->js('table-event', ['type' => 'columnFilters', 'data' => $filters]),
+                'onGlobalFilterChange' => fn($filter) => $this->js('table-event', ['type' => 'globalFilter', 'data' => $filter]),
+                'onPaginationChange' => fn($pagination) => $this->js('table-event', ['type' => 'pagination', 'data' => $pagination]),
+                'onSortingChange' => fn($sorting) => $this->js('table-event', ['type' => 'sorting', 'data' => $sorting]),
+                'onGroupingChange' => fn($grouping) => $this->js('table-event', ['type' => 'grouping', 'data' => $grouping]),
+                'onColumnVisibilityChange' => fn($visibility) => $this->js('table-event', ['type' => 'columnVisibility', 'data' => $visibility]),
+                'onRowExpansionChange' => fn($expansion) => $this->js('table-event', ['type' => 'rowExpansion', 'data' => $expansion]),
             ]
         );
     }

@@ -28,10 +28,10 @@ class RowSelectionEventHandler implements TableEventHandler {
             ($this->callback)($selectedRows);
         } elseif (is_string($this->callback)) {
             if (str_contains($this->callback, '.')) {
-                // Handle Livewire method calls
+                // Handle method calls through Mingle
                 [$component, $method] = explode('.', $this->callback);
                 if (method_exists($component, $method)) {
-                    $component->$method($selectedRows);
+                    $this->js($method, ['rows' => $selectedRows]);
                 }
             } else {
                 // Handle direct event dispatch
