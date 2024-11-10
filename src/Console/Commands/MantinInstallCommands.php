@@ -202,10 +202,6 @@ class MantineInstallCommand extends Command
             File::makeDirectory($jsPath, 0755, true);
         }
 
-        // Copy JS files
-        File::copy(__DIR__ . '/../../../stubs/js/app.js', resource_path('js/app.js'));
-        File::copy(__DIR__ . '/../../../stubs/js/bootstrap.js', resource_path('js/bootstrap.js'));
-
         // Copy React components
         $componentsPath = resource_path('js/Components');
         if (!File::exists($componentsPath)) {
