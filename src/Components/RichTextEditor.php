@@ -48,17 +48,19 @@ class RichTextEditor extends MantineComponent
         public mixed $stickyOffset = null,
         public mixed $classNames = null,
         public mixed $styles = null,
-        public mixed $sanitize = false,
+        public mixed $sanitize = true, // Enable sanitization by default
         public mixed $placeholder = null,
         public mixed $characterCount = false,
         public mixed $maxLength = null,
         public mixed $textAlign = true,
+        // YouTube configuration
         public mixed $youtubeEmbed = false,
         public mixed $youtubeWidth = 640,
         public mixed $youtubeHeight = 480,
         public mixed $youtubeControls = true,
         public mixed $youtubeNoCookie = false,
         public mixed $youtubeModestBranding = false,
+        // Feature flags
         public mixed $enableEmoji = false,
         public mixed $enableMentions = false,
         public mixed $enableTasks = false,
@@ -66,6 +68,16 @@ class RichTextEditor extends MantineComponent
         public mixed $enableFontFamily = false,
         public mixed $enableBubbleMenu = false,
         public mixed $enableFloatingMenu = false,
+        // Table configuration
+        public mixed $tableRows = 3,
+        public mixed $tableCols = 3,
+        // Mention configuration
+        public mixed $mentionSuggestions = [],
+        public mixed $mentionChar = '@',
+        // Typography configuration
+        public mixed $enableSuperscript = false,
+        public mixed $enableSubscript = false,
+        public mixed $enableHighlight = false,
     ) {
         parent::__construct();
 
@@ -104,15 +116,41 @@ class RichTextEditor extends MantineComponent
     /**
      * Get the editor content as HTML
      *
+     * @param array $options Additional options for HTML conversion
      * @return string
      */
-    public function getHTML()
+    public function getHTML(array $options = [])
     {
         if (!$this->content) {
             return '';
         }
 
-        return (new \Tiptap\Editor)->setContent($this->content)->getHTML();
+        $editor = new \Tiptap\Editor;
+        
+        // Configure extensions based on enabled features
+        if ($this->enableTables) {
+            $editor->addExtension(new \Tiptap\Extensions\Table([
+                'rows' => $this->tableRows,
+                'cols' => $this->tableCols,
+            ]));
+        }
+        
+        if ($this->enableMentions) {
+            $editor->addExtension(new \Tiptap\Extensions\Mention([
+                'suggestions' => $this->mentionSuggestions,
+                'char' => $this->mentionChar,
+            ]));
+        }
+        
+        if ($this->enableEmoji) {
+            $editor->addExtension(new \Tiptap\Extensions\Emoji());
+        }
+
+        if ($this->sanitize) {
+            $editor->addExtension(new \Tiptap\Extensions\TextCleaner());
+        }
+
+        return $editor->setContent($this->content)->getHTML($options);
     }
 
     /**
