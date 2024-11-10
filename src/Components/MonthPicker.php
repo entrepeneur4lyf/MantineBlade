@@ -2,10 +2,71 @@
 
 namespace MantineBlade\Components;
 
+/**
+ * MonthPicker component for selecting months and dates.
+ *
+ * The MonthPicker component provides a calendar-style interface for selecting months.
+ * It supports single month selection, range selection, and multiple month selection modes.
+ *
+ * @see https://mantine.dev/dates/month-picker/
+ *
+ * @example Basic usage
+ * ```blade
+ * <x-mantine-month-picker
+ *     :value="$selectedMonth"
+ *     @change="selectedMonth = $event"
+ * />
+ * ```
+ *
+ * @example Range selection
+ * ```blade
+ * <x-mantine-month-picker
+ *     type="range"
+ *     :min-date="new Date(2023, 0)"
+ *     :max-date="new Date(2024, 11)"
+ *     :number-of-columns="2"
+ * />
+ * ```
+ *
+ * @example Multiple selection
+ * ```blade
+ * <x-mantine-month-picker
+ *     type="multiple"
+ *     :size="'lg'"
+ *     :locale="'es'"
+ *     :allow-deselect="true"
+ * />
+ * ```
+ */
 class MonthPicker extends MantineComponent
 {
     /**
-     * Create a new component instance.
+     * Create a new MonthPicker component instance.
+     *
+     * @param mixed $value Current value
+     * @param mixed $defaultValue Default value
+     * @param mixed $onChange Callback for value changes
+     * @param mixed $type Picker type ('default', 'range', or 'multiple')
+     * @param mixed $allowDeselect Allow deselecting values
+     * @param mixed $allowSingleDateInRange Allow selecting single date in range picker
+     * @param mixed $defaultDate Default date shown on mount
+     * @param mixed $date Current displayed date
+     * @param mixed $onDateChange Callback for date changes
+     * @param mixed $maxLevel Maximum level user can go up to ('year' or 'decade')
+     * @param mixed $minDate Minimum possible date to select
+     * @param mixed $maxDate Maximum possible date to select
+     * @param mixed $getYearControlProps Function to add props to year controls
+     * @param mixed $getMonthControlProps Function to add props to month controls
+     * @param mixed $numberOfColumns Number of pickers to show
+     * @param mixed $size Component size ('xs', 'sm', 'md', 'lg', 'xl')
+     * @param mixed $yearsListFormat Years list format
+     * @param mixed $monthsListFormat Months list format
+     * @param mixed $decadeLabelFormat Decade label format
+     * @param mixed $yearLabelFormat Year label format
+     * @param mixed $locale Locale used for labels
+     * @param mixed $ariaLabels Aria labels
+     * @param mixed $classNames Custom class names
+     * @param mixed $styles Custom styles
      */
     public function __construct(
         public mixed $value = null,
