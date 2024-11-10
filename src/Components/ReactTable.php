@@ -232,6 +232,13 @@ class ReactTable extends MantineComponent
         return $this;
     }
 
+    /**
+     * Validates the provided table features against allowed configurations
+     * 
+     * @param array<string,mixed> $features Features to validate
+     * @return array<string,mixed> Validated features
+     * @throws \InvalidArgumentException If any feature is invalid
+     */
     private function validateFeatures(array $features): array 
     {
         $validatedFeatures = [];
@@ -290,6 +297,17 @@ class ReactTable extends MantineComponent
         return $this;
     }
 
+    /**
+     * Enables lazy loading functionality for the table
+     * 
+     * Configures the table to fetch data on-demand using the provided callback.
+     * Useful for handling large datasets efficiently.
+     * 
+     * @param callable $dataFetcher Callback function to fetch data chunks
+     * @param int $pageSize Number of records to fetch per page
+     * @param bool $enableInfiniteScroll Whether to enable infinite scroll loading
+     * @return self
+     */
     public function enableLazyLoading(
         callable $dataFetcher, 
         int $pageSize = 50, 
@@ -303,6 +321,18 @@ class ReactTable extends MantineComponent
         return $this;
     }
 
+    /**
+     * Configures table virtualization settings
+     * 
+     * Virtualization improves performance by only rendering visible rows/columns.
+     * Adjust thresholds and overscan values to optimize rendering performance.
+     * 
+     * @param int $rowOverscan Number of rows to render beyond visible area
+     * @param int $columnOverscan Number of columns to render beyond visible area
+     * @param int $rowThreshold Minimum rows before enabling virtualization
+     * @param int $columnThreshold Minimum columns before enabling virtualization
+     * @return self
+     */
     public function configureVirtualization(
         int $rowOverscan = 5, 
         int $columnOverscan = 2,
