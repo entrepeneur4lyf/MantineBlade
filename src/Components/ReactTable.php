@@ -9,7 +9,7 @@ namespace MantineBlade\Components;
  * like sorting, filtering, pagination, and row selection. Built on top of TanStack Table V8
  * and integrated with Mantine's design system.
  *
- * @see https://tanstack.com/table/v8/docs/guide/introduction
+ * @see https://v2.mantine-react-table.com/
  *
  * @example Basic usage with simple data
  * ```blade
