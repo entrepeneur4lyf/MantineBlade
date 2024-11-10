@@ -135,9 +135,9 @@ class ExampleRichTextEditor extends Component
                     </x-mantine-rich-text-editor>
                 </div>
 
-                <!-- YouTube Embed Example -->
+                <!-- Advanced Features Example -->
                 <div class="mb-8">
-                    <x-mantine-title order="2" class="mb-4">YouTube Embed Support</x-mantine-title>
+                    <x-mantine-title order="2" class="mb-4">Advanced Editor Features</x-mantine-title>
                     <x-mantine-rich-text-editor
                         :content="$content"
                         :youtube-embed="true"
@@ -145,6 +145,13 @@ class ExampleRichTextEditor extends Component
                         :youtube-height="450"
                         :youtube-controls="true"
                         :youtube-modest-branding="true"
+                        :enable-emoji="true"
+                        :enable-mentions="true"
+                        :enable-tasks="true"
+                        :enable-tables="true"
+                        :enable-font-family="true"
+                        :enable-bubble-menu="true"
+                        :enable-floating-menu="true"
                     >
                         <x-mantine-rich-text-editor-toolbar>
                             <x-mantine-rich-text-editor-controls-group>

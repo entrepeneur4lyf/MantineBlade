@@ -59,6 +59,13 @@ class RichTextEditor extends MantineComponent
         public mixed $youtubeControls = true,
         public mixed $youtubeNoCookie = false,
         public mixed $youtubeModestBranding = false,
+        public mixed $enableEmoji = false,
+        public mixed $enableMentions = false,
+        public mixed $enableTasks = false,
+        public mixed $enableTables = false,
+        public mixed $enableFontFamily = false,
+        public mixed $enableBubbleMenu = false,
+        public mixed $enableFloatingMenu = false,
     ) {
         parent::__construct();
 
