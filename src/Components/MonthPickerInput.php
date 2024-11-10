@@ -2,6 +2,44 @@
 
 namespace MantineBlade\Components;
 
+/**
+ * MonthPickerInput component for selecting months with an input field interface.
+ *
+ * The MonthPickerInput component combines an input field with a month picker dropdown,
+ * allowing users to either type dates or select them from a calendar interface.
+ *
+ * @see https://mantine.dev/dates/month-picker-input/
+ *
+ * @example Basic usage
+ * ```blade
+ * <x-mantine-month-picker-input
+ *     label="Select month"
+ *     placeholder="Pick a month"
+ *     :value="$selectedMonth"
+ * />
+ * ```
+ *
+ * @example With custom format and clearable
+ * ```blade
+ * <x-mantine-month-picker-input
+ *     :value-format="'MM/YYYY'"
+ *     :clearable="true"
+ *     label="Custom format"
+ *     :size="'lg'"
+ * />
+ * ```
+ *
+ * @example With sections and validation
+ * ```blade
+ * <x-mantine-month-picker-input
+ *     :with-asterisk="true"
+ *     :required="true"
+ *     label="Required field"
+ *     :left-section="'📅'"
+ *     :error="$errors->first('month')"
+ * />
+ * ```
+ */
 class MonthPickerInput extends MantineComponent
 {
     /**
