@@ -4,8 +4,33 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Alert Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Alert component.
+ * It showcases different variants, styles, and interactive features through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic alert usage with icons
+ * - Different visual variants (filled, light, outline, transparent)
+ * - Closeable alerts with event handling
+ * - Border radius variations
+ * - Custom icons for different alert types
+ * - Custom styling options
+ *
+ * @see \MantineBlade\Components\Alert
+ * @link https://mantine.dev/core/alert/
+ */
 class ExampleAlert extends Component
 {
+    /**
+     * Handle alert close event
+     *
+     * Demonstrates how to handle the close button click event by dispatching
+     * a notification to inform the user that the alert was closed.
+     *
+     * @return void
+     */
     public function handleClose()
     {
         $this->dispatch('notify', [
@@ -14,6 +39,19 @@ class ExampleAlert extends Component
         ]);
     }
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic alert with icon and title
+     * 2. Different visual variants (filled, light, outline, transparent)
+     * 3. Closeable alert with event handling
+     * 4. Different border radius options
+     * 5. Semantic alerts with appropriate icons (success, warning, error)
+     * 6. Custom styled alert with CSS modifications
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

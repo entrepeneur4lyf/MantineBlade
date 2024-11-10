@@ -4,8 +4,34 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Avatar Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Avatar component.
+ * It showcases different styles, grouping options, and integrations through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic avatar usage with images
+ * - Default and custom placeholders
+ * - Automatic initials generation
+ * - Different visual variants
+ * - Avatar grouping
+ * - Tooltip integration
+ * - Link functionality
+ *
+ * @see \MantineBlade\Components\Avatar
+ * @link https://mantine.dev/core/avatar/
+ */
 class ExampleAvatar extends Component
 {
+    /**
+     * Sample names for initials examples
+     *
+     * Used to demonstrate automatic initials generation
+     * and color assignment for avatars.
+     *
+     * @var array
+     */
     public $names = [
         'John Doe',
         'Jane Mol',
@@ -16,6 +42,14 @@ class ExampleAvatar extends Component
         'Tom Smith',
     ];
 
+    /**
+     * Sample character data for avatar groups
+     *
+     * Contains character information including names and avatar images
+     * for demonstrating grouped avatars with tooltips.
+     *
+     * @var array
+     */
     public $charactersList = [
         [
             'name' => 'Salazar Troop',
@@ -31,6 +65,24 @@ class ExampleAvatar extends Component
         ],
     ];
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic avatar with image and fallbacks
+     * 2. Custom placeholders and icons
+     * 3. Automatic initials generation
+     * 4. Color restriction for initials
+     * 5. Different visual variants
+     * 6. Avatar grouping
+     * 7. Integration with tooltips
+     * 8. Avatar as a link
+     *
+     * Each example showcases different features and customization
+     * options available with the Avatar component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

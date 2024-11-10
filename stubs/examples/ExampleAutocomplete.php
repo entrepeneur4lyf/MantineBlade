@@ -4,11 +4,63 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Autocomplete Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Autocomplete component.
+ * It showcases different styles, behaviors, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic autocomplete functionality
+ * - Different visual variants
+ * - Section customization (left/right sections)
+ * - Grouped options
+ * - Custom filtering
+ * - Performance optimization with limits
+ * - Custom option rendering
+ * - Error states
+ * - Controlled inputs
+ * - Dropdown control
+ *
+ * @see \MantineBlade\Components\Autocomplete
+ * @link https://mantine.dev/core/autocomplete/
+ */
 class ExampleAutocomplete extends Component
 {
+    /**
+     * Value for controlled input example
+     *
+     * @var string
+     */
     public $value = '';
+
+    /**
+     * Controls dropdown visibility in dropdown control example
+     *
+     * @var bool
+     */
     public $dropdownOpened = false;
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic autocomplete with simple string options
+     * 2. Different visual variants (default, filled, unstyled)
+     * 3. Custom sections with icons
+     * 4. Grouped options with categories
+     * 5. Advanced filtering with custom logic
+     * 6. Performance optimization for large datasets
+     * 7. Rich option rendering with user data
+     * 8. Error state handling
+     * 9. Controlled input behavior
+     * 10. Manual dropdown control
+     *
+     * Each example showcases different features and customization
+     * options available with the Autocomplete component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

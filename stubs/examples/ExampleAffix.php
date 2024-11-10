@@ -4,20 +4,75 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Affix Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Affix component.
+ * It showcases different positioning options, scroll-based interactions, and integration with other
+ * Mantine components.
+ *
+ * Features demonstrated:
+ * - Scroll-to-top functionality
+ * - Custom positioning
+ * - Z-index control
+ * - Integration with notifications
+ * - Fixed action buttons
+ * - Transition effects
+ *
+ * @see \MantineBlade\Components\Affix
+ * @link https://mantine.dev/core/affix/
+ */
 class ExampleAffix extends Component
 {
+    /**
+     * Current vertical scroll position of the window
+     *
+     * Used to control the visibility of the scroll-to-top button
+     * @var int
+     */
     public $scrollY = 0;
 
+    /**
+     * Trigger scroll to top animation
+     *
+     * Dispatches an event that will be handled by JavaScript to smoothly
+     * scroll the window to the top
+     *
+     * @return void
+     */
     public function scrollToTop()
     {
         $this->dispatch('scrollToTop');
     }
 
+    /**
+     * Update the current scroll position
+     *
+     * Called by JavaScript scroll event listener to keep track of
+     * the window's vertical scroll position
+     *
+     * @param int $y Vertical scroll position in pixels
+     * @return void
+     */
     public function updateScroll($y)
     {
         $this->scrollY = $y;
     }
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Scroll-to-top button that appears when scrolled
+     * 2. Fixed position button with custom z-index
+     * 3. Fixed notification example
+     * 4. Fixed action buttons group
+     *
+     * Each example showcases different positioning and styling options
+     * available with the Affix component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

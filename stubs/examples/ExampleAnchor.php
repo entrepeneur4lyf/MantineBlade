@@ -4,8 +4,59 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Anchor Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Anchor component.
+ * It showcases different styles, behaviors, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic link usage
+ * - Different underline behaviors
+ * - Gradient text styling
+ * - Component transformation (button as link)
+ * - Typography customization
+ * - Custom styling with Tailwind
+ * - Security attributes for external links
+ * - Size variations
+ *
+ * @see \MantineBlade\Components\Anchor
+ * @link https://mantine.dev/core/anchor/
+ */
 class ExampleAnchor extends Component
 {
+    /**
+     * Handle button click event
+     *
+     * Demonstrates how to handle click events when using Anchor
+     * as a button component. Dispatches a notification to provide
+     * user feedback.
+     *
+     * @return void
+     */
+    public function handleClick()
+    {
+        $this->dispatch('notify', [
+            'message' => 'Button clicked!',
+            'type' => 'success'
+        ]);
+    }
+
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic link with target attribute
+     * 2. Different underline behaviors (always, hover, never)
+     * 3. Gradient text styling with typography props
+     * 4. Button styled as link with click handler
+     * 5. Typography customization (size, weight, transform)
+     * 6. Custom styling with Tailwind classes
+     * 7. External link with security attributes
+     * 8. Size variations (xs to xl)
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'
@@ -116,14 +167,5 @@ class ExampleAnchor extends Component
                 </div>
             </div>
         blade;
-    }
-
-    public function handleClick()
-    {
-        // Handle click event
-        $this->dispatch('notify', [
-            'message' => 'Button clicked!',
-            'type' => 'success'
-        ]);
     }
 }

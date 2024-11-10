@@ -4,8 +4,37 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example AreaChart Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade AreaChart component.
+ * It showcases different chart types, data visualizations, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic area chart
+ * - Stacked area chart
+ * - Percentage-based area chart
+ * - Split area chart for positive/negative values
+ * - Legend customization
+ * - Point labels
+ * - Axis labels
+ * - Value formatting
+ * - Reference lines
+ * - Vertical orientation
+ *
+ * @see \MantineBlade\Components\AreaChart
+ * @link https://mantine.dev/charts/area-chart/
+ */
 class ExampleAreaChart extends Component
 {
+    /**
+     * Sample data for multi-series charts
+     *
+     * Contains daily sales data for different products over a period,
+     * demonstrating how to structure data for various chart types.
+     *
+     * @var array
+     */
     public $data = [
         ['date' => 'Mar 22', 'Apples' => 2890, 'Oranges' => 2338, 'Tomatoes' => 3795],
         ['date' => 'Mar 23', 'Apples' => 2756, 'Oranges' => 2103, 'Tomatoes' => 3590],
@@ -14,6 +43,14 @@ class ExampleAreaChart extends Component
         ['date' => 'Mar 26', 'Apples' => 3129, 'Oranges' => 2986, 'Tomatoes' => 3932],
     ];
 
+    /**
+     * Sample data for split area chart
+     *
+     * Contains positive and negative values to demonstrate
+     * split area visualization capabilities.
+     *
+     * @var array
+     */
     public $splitData = [
         ['date' => 'Mar 22', 'Apples' => 50],
         ['date' => 'Mar 23', 'Apples' => -20],
@@ -22,6 +59,27 @@ class ExampleAreaChart extends Component
         ['date' => 'Mar 26', 'Apples' => 60],
     ];
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic area chart with multiple series
+     * 2. Stacked area chart showing cumulative values
+     * 3. Percentage-based area chart
+     * 4. Split area chart for positive/negative values
+     * 5. Chart with legend in different positions
+     * 6. Custom series labels
+     * 7. Point labels for data points
+     * 8. Axis labels for better context
+     * 9. Value formatting and units
+     * 10. Reference lines for thresholds
+     * 11. Vertical orientation option
+     *
+     * Each example showcases different features and customization
+     * options available with the AreaChart component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

@@ -4,8 +4,35 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Accordion Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Accordion component.
+ * It showcases different styles, layouts, and interactive features through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic accordion usage with icons
+ * - Custom control labels with avatars and descriptions
+ * - Icon integration in accordion controls
+ * - Disabled items functionality
+ * - Custom chevron implementation
+ * - Multiple sections support
+ *
+ * @see \MantineBlade\Components\Accordion
+ * @link https://mantine.dev/core/accordion/
+ */
 class ExampleAccordion extends Component
 {
+    /**
+     * Sample grocery items data for basic examples
+     *
+     * Each item contains:
+     * - emoji: Icon representation
+     * - value: Unique identifier and display text
+     * - description: Detailed description of the item
+     *
+     * @var array
+     */
     public $groceries = [
         [
             'emoji' => '🍎',
@@ -24,6 +51,18 @@ class ExampleAccordion extends Component
         ],
     ];
 
+    /**
+     * Sample character data for advanced styling example
+     *
+     * Each character contains:
+     * - id: Unique identifier
+     * - image: Avatar URL
+     * - label: Display name
+     * - description: Short description
+     * - content: Detailed content
+     *
+     * @var array
+     */
     public $charactersList = [
         [
             'id' => 'bender',
@@ -48,6 +87,19 @@ class ExampleAccordion extends Component
         ],
     ];
 
+    /**
+     * Render the component
+     *
+     * Demonstrates multiple accordion configurations:
+     * 1. Basic usage with emoji icons
+     * 2. Custom control labels with avatars and descriptions
+     * 3. FontAwesome icon integration
+     * 4. Disabled items demonstration
+     * 5. Custom chevron implementation
+     * 6. Multiple sections support
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

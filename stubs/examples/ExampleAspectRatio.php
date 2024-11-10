@@ -4,8 +4,36 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example AspectRatio Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade AspectRatio component.
+ * It showcases how to maintain specific aspect ratios for different types of media content.
+ *
+ * Features demonstrated:
+ * - Image aspect ratio maintenance
+ * - Map embedding with fixed dimensions
+ * - Video iframe with standard 16:9 ratio
+ * - Custom sizing with max-width and margin controls
+ *
+ * @see \MantineBlade\Components\AspectRatio
+ * @link https://mantine.dev/core/aspect-ratio/
+ */
 class ExampleAspectRatio extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic image example with custom ratio and max width
+     * 2. Google Maps embed with 16:9 aspect ratio
+     * 3. YouTube video embed maintaining proper video dimensions
+     *
+     * Each example showcases a different use case for maintaining
+     * specific aspect ratios while ensuring responsive behavior.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

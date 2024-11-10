@@ -4,10 +4,48 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example ActionIcon Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade ActionIcon component.
+ * It showcases different styles, states, sizes, and grouping options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic usage with icons
+ * - Gradient variants
+ * - Size variations
+ * - Disabled states
+ * - Loading states with custom loaders
+ * - ActionIcon groups (horizontal and vertical)
+ * - Link functionality
+ *
+ * @see \MantineBlade\Components\ActionIcon
+ * @link https://mantine.dev/core/action-icon/
+ */
 class ExampleActionIcon extends Component
 {
+    /**
+     * Controls the loading state of the loading examples
+     *
+     * @var bool
+     */
     public $loading = false;
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic ActionIcon with FontAwesome icon
+     * 2. Gradient variant with custom colors
+     * 3. Size variations (xs to xl)
+     * 4. Disabled states (disabled prop vs data-disabled)
+     * 5. Loading states with different variants
+     * 6. Custom loader configuration
+     * 7. ActionIcon groups (horizontal and vertical)
+     * 8. Link functionality with external URL
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'
