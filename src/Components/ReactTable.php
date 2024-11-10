@@ -73,9 +73,20 @@ class ReactTable extends MantineComponent
         'paginateExpandedRows' => true,
         'enableSorting' => true,
         'enableMultiSort' => false,
+        'enableGlobalFilter' => true,
+        'enableGlobalFilterModes' => true,
+        'enableColumnActions' => true,
+        'enableDensityToggle' => true,
+        'enableFullScreenToggle' => true,
+        'enableHiding' => true,
+        'enableClickToCopy' => false,
         'selectDisplayMode' => 'checkbox',
         'selectAllMode' => 'page',
-        'layoutMode' => 'semantic'
+        'layoutMode' => 'semantic',
+        'paginationDisplayMode' => 'default',
+        'columnFilterDisplayMode' => 'subheader',
+        'editDisplayMode' => 'modal',
+        'createDisplayMode' => 'modal'
     ];
 
     /**
@@ -95,9 +106,20 @@ class ReactTable extends MantineComponent
         'paginateExpandedRows' => 'bool',
         'enableSorting' => 'bool',
         'enableMultiSort' => 'bool',
+        'enableGlobalFilter' => 'bool',
+        'enableGlobalFilterModes' => 'bool',
+        'enableColumnActions' => 'bool',
+        'enableDensityToggle' => 'bool',
+        'enableFullScreenToggle' => 'bool',
+        'enableHiding' => 'bool',
+        'enableClickToCopy' => 'bool',
         'selectDisplayMode' => ['checkbox', 'radio', 'switch'],
         'selectAllMode' => ['page', 'all'],
-        'layoutMode' => ['semantic', 'grid']
+        'layoutMode' => ['semantic', 'grid'],
+        'paginationDisplayMode' => ['default', 'pages', 'custom'],
+        'columnFilterDisplayMode' => ['subheader', 'popover', 'custom'],
+        'editDisplayMode' => ['modal', 'row', 'cell', 'table', 'custom'],
+        'createDisplayMode' => ['modal', 'row', 'custom']
     ];
 
     public function __construct(
@@ -106,6 +128,21 @@ class ReactTable extends MantineComponent
         public array|null $state = null,
         ?array $features = null,
         public mixed $onRowSelectionChange = null,
+        public mixed $onColumnFiltersChange = null,
+        public mixed $onGlobalFilterChange = null,
+        public mixed $onPaginationChange = null,
+        public mixed $onSortingChange = null,
+        public mixed $onColumnOrderChange = null,
+        public mixed $onExpandedChange = null,
+        public ?int $pageCount = null,
+        public ?int $rowCount = null,
+        public ?array $defaultColumn = null,
+        public ?array $initialState = null,
+        public bool $manualFiltering = false,
+        public bool $manualPagination = false,
+        public bool $manualSorting = false,
+        public bool $enableColumnVirtualization = false,
+        public bool $enableRowVirtualization = false
     ) {
         parent::__construct();
 
