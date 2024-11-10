@@ -94,6 +94,9 @@ class ReactTable extends MantineComponent
      * 
      * @var array<string, string|array<string>>
      */
+    private array $state = [];
+    private ?array $lazyLoadingConfig = null;
+    
     private const ALLOWED_FEATURES = [
         'enableColumnFiltering' => 'bool',
         'enableColumnFilterModes' => 'bool',
@@ -125,24 +128,18 @@ class ReactTable extends MantineComponent
     public function __construct(
         public array|null $data = null,
         public array|null $columns = null,
-        public array|null $state = null,
         ?array $features = null,
-        public mixed $onRowSelectionChange = null,
-        public mixed $onColumnFiltersChange = null,
-        public mixed $onGlobalFilterChange = null,
-        public mixed $onPaginationChange = null,
-        public mixed $onSortingChange = null,
-        public mixed $onColumnOrderChange = null,
-        public mixed $onExpandedChange = null,
+        public ?TableEventHandler $onRowSelectionChange = null,
+        public ?TableEventHandler $onColumnFiltersChange = null,
+        public ?TableEventHandler $onGlobalFilterChange = null,
+        public ?TableEventHandler $onPaginationChange = null,
+        public ?TableEventHandler $onSortingChange = null,
+        public int $rowVirtualizerOverscan = 5,
+        public int $columnVirtualizerOverscan = 2,
+        public int $rowVirtualizationThreshold = 100,
+        public int $columnVirtualizationThreshold = 20,
         public ?int $pageCount = null,
-        public ?int $rowCount = null,
-        public ?array $defaultColumn = null,
-        public ?array $initialState = null,
-        public bool $manualFiltering = false,
-        public bool $manualPagination = false,
-        public bool $manualSorting = false,
-        public bool $enableColumnVirtualization = false,
-        public bool $enableRowVirtualization = false
+        public ?int $rowCount = null
     ) {
         parent::__construct();
 
@@ -233,5 +230,94 @@ class ReactTable extends MantineComponent
         ];
 
         return $this;
+    }
+
+    private function validateFeatures(array $features): array 
+    {
+        $validatedFeatures = [];
+        foreach ($features as $feature => $value) {
+            if (!isset(self::ALLOWED_FEATURES[$feature])) {
+                throw new \InvalidArgumentException("Invalid feature: $feature");
+            }
+
+            $expectedType = self::ALLOWED_FEATURES[$feature];
+            
+            if (is_array($expectedType)) {
+                if (!in_array($value, $expectedType)) {
+                    throw new \InvalidArgumentException(
+                        "Invalid value for $feature. Allowed values: " . 
+                        implode(', ', $expectedType)
+                    );
+                }
+            } elseif ($expectedType === 'bool' && !is_bool($value)) {
+                throw new \InvalidArgumentException("$feature must be a boolean");
+            }
+
+            $validatedFeatures[$feature] = $value;
+        }
+        return $validatedFeatures;
+    }
+
+    private function mergeFeatures(?array $customFeatures = null): array
+    {
+        $mergedFeatures = $this->tableFeatures;
+        
+        if ($customFeatures !== null) {
+            $validatedFeatures = $this->validateFeatures($customFeatures);
+            $mergedFeatures = array_merge($mergedFeatures, $validatedFeatures);
+        }
+
+        return $mergedFeatures;
+    }
+
+    public function resetState(?array $newState = null): self
+    {
+        $this->state = $newState ?? [
+            'pagination' => [
+                'pageSize' => $this->tableFeatures['defaultPageSize'] ?? 10,
+                'pageIndex' => 0
+            ],
+            'sorting' => [],
+            'columnFilters' => [],
+            'globalFilter' => null
+        ];
+        return $this;
+    }
+
+    public function updateState(array $stateUpdates): self
+    {
+        $this->state = array_merge($this->state ?? [], $stateUpdates);
+        return $this;
+    }
+
+    public function enableLazyLoading(
+        callable $dataFetcher, 
+        int $pageSize = 50, 
+        bool $enableInfiniteScroll = false
+    ): self {
+        $this->lazyLoadingConfig = [
+            'fetcher' => $dataFetcher,
+            'pageSize' => $pageSize,
+            'infiniteScroll' => $enableInfiniteScroll
+        ];
+        return $this;
+    }
+
+    public function configureVirtualization(
+        int $rowOverscan = 5, 
+        int $columnOverscan = 2,
+        int $rowThreshold = 100,
+        int $columnThreshold = 20
+    ): self {
+        $this->rowVirtualizerOverscan = $rowOverscan;
+        $this->columnVirtualizerOverscan = $columnOverscan;
+        $this->rowVirtualizationThreshold = $rowThreshold;
+        $this->columnVirtualizationThreshold = $columnThreshold;
+        return $this;
+    }
+
+    public function getFeature(string $featureName): mixed
+    {
+        return $this->tableFeatures[$featureName] ?? null;
     }
 }
