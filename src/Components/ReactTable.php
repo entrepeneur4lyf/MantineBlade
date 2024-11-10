@@ -62,6 +62,40 @@ class ReactTable extends MantineComponent
      * @var array<string, bool|string>
      */
     protected array $tableFeatures = [
+        // Existing features
+        'enableColumnFiltering' => false,
+        'enableColumnFilterModes' => false,
+        'enableColumnOrdering' => false,
+        'enableColumnPinning' => false,
+        'enableColumnResizing' => false,
+        'enableRowSelection' => false,
+        'enableMultiRowSelection' => false,
+        'enablePagination' => true,
+        'paginateExpandedRows' => true,
+        'enableSorting' => true,
+        'enableMultiSort' => false,
+        'enableGlobalFilter' => true,
+        'enableGlobalFilterModes' => true,
+        'enableColumnActions' => true,
+        'enableDensityToggle' => true,
+        'enableFullScreenToggle' => true,
+        'enableHiding' => true,
+        'enableClickToCopy' => false,
+        
+        // New features
+        'enableGrouping' => false,
+        'enableExpandAll' => false,
+        'enableRowNumbers' => false,
+        'enableRowActions' => false,
+        'enableColumnGrouping' => false,
+        'enableAggregationFunctions' => false,
+        'enableRowDetail' => false,
+        'enableToolbarCustomActions' => false,
+        'enableDataExport' => false,
+        'enableColumnVirtualization' => false,
+        'manualGrouping' => false,
+        
+        // Display modes
         'enableColumnFiltering' => false,
         'enableColumnFilterModes' => false,
         'enableColumnOrdering' => false,
@@ -134,6 +168,13 @@ class ReactTable extends MantineComponent
         public ?TableEventHandler $onGlobalFilterChange = null,
         public ?TableEventHandler $onPaginationChange = null,
         public ?TableEventHandler $onSortingChange = null,
+        public ?TableEventHandler $onGroupingChange = null,
+        public ?TableEventHandler $onColumnVisibilityChange = null,
+        public ?TableEventHandler $onRowExpansionChange = null,
+        public ?array $aggregationFunctions = null,
+        public ?array $toolbarCustomActions = null,
+        public ?callable $renderDetailPanel = null,
+        public ?array $rowActionButtons = null,
         public int $rowVirtualizerOverscan = 5,
         public int $columnVirtualizerOverscan = 2,
         public int $rowVirtualizationThreshold = 100,
@@ -349,5 +390,79 @@ class ReactTable extends MantineComponent
     public function getFeature(string $featureName): mixed
     {
         return $this->tableFeatures[$featureName] ?? null;
+    }
+
+    /**
+     * Configure aggregation functions for grouped columns
+     *
+     * @param array<string,callable> $functions Map of column keys to aggregation functions
+     * @return self
+     */
+    public function setAggregationFunctions(array $functions): self
+    {
+        $this->aggregationFunctions = $functions;
+        return $this;
+    }
+
+    /**
+     * Add custom actions to the toolbar
+     *
+     * @param array<string,array{label:string,icon?:string,action:callable}> $actions
+     * @return self
+     */
+    public function addToolbarActions(array $actions): self
+    {
+        $this->toolbarCustomActions = $actions;
+        return $this;
+    }
+
+    /**
+     * Configure row action buttons
+     *
+     * @param array<array{label:string,icon?:string,action:callable}> $buttons
+     * @return self
+     */
+    public function setRowActionButtons(array $buttons): self
+    {
+        $this->rowActionButtons = $buttons;
+        return $this;
+    }
+
+    /**
+     * Set the detail panel renderer for expandable rows
+     *
+     * @param callable $renderer Function that returns the detail panel content
+     * @return self
+     */
+    public function setDetailPanelRenderer(callable $renderer): self
+    {
+        $this->renderDetailPanel = $renderer;
+        return $this;
+    }
+
+    /**
+     * Enable data export with specified formats
+     *
+     * @param array<string> $formats Export formats (csv, xlsx, pdf)
+     * @return self
+     */
+    public function enableDataExport(array $formats = ['csv', 'xlsx']): self
+    {
+        $this->tableFeatures['enableDataExport'] = true;
+        $this->exportFormats = $formats;
+        return $this;
+    }
+
+    /**
+     * Configure column grouping
+     *
+     * @param array<string,array{groupName:string,aggregationFn?:callable}> $groupingConfig
+     * @return self
+     */
+    public function configureColumnGrouping(array $groupingConfig): self
+    {
+        $this->tableFeatures['enableColumnGrouping'] = true;
+        $this->columnGroupingConfig = $groupingConfig;
+        return $this;
     }
 }

@@ -59,3 +59,36 @@ class SortingEventHandler implements TableEventHandler {
         ($this->callback)($sorting);
     }
 }
+
+/**
+ * Handles column grouping events
+ */
+class GroupingEventHandler implements TableEventHandler {
+    public function __construct(private callable $callback) {}
+
+    public function handle(mixed $grouping): void {
+        ($this->callback)($grouping);
+    }
+}
+
+/**
+ * Handles column visibility changes
+ */
+class ColumnVisibilityEventHandler implements TableEventHandler {
+    public function __construct(private callable $callback) {}
+
+    public function handle(mixed $visibility): void {
+        ($this->callback)($visibility);
+    }
+}
+
+/**
+ * Handles row expansion state changes
+ */
+class RowExpansionEventHandler implements TableEventHandler {
+    public function __construct(private callable $callback) {}
+
+    public function handle(mixed $expandedRows): void {
+        ($this->callback)($expandedRows);
+    }
+}
