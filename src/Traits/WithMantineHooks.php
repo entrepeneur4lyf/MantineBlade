@@ -58,6 +58,8 @@ trait WithMantineHooks
     /**
      * Execute Mantine hooks for a given lifecycle event
      */
+    protected array $mantineHooks = [];
+
     protected function executeMantineHooks(string $type, mixed ...$args): void
     {
         $hooks = $this->{"onMantine{$type}"} ?? [];
@@ -67,8 +69,7 @@ trait WithMantineHooks
             }
         }
     }
-}
-    
+
     /**
      * Register a Mantine hook
      */
