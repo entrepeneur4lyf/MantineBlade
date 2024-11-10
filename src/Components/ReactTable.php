@@ -191,6 +191,7 @@ class ReactTable extends Component
         array|Collection|null $data = null,
         array|null $columns = null,
         ?array $features = null,
+        ?array $state = null,
         public ?TableEventHandler $onRowSelectionChange = null,
         public ?TableEventHandler $onColumnFiltersChange = null,
         public ?TableEventHandler $onGlobalFilterChange = null,
@@ -217,13 +218,27 @@ class ReactTable extends Component
             $this->configureFeatures($features);
         }
 
+        $this->state = $state ?? [];
+        
+        // Configure Mingle event listeners
+        $this->js('table-event', function($event, $detail) {
+            $this->handleTableEvent($event, $detail);
+        });
+        
         $this->props = array_merge(
             $this->tableFeatures,
             [
-                'data' => $data,
-                'columns' => $columns,
-                'state' => $state,
-                'onRowSelectionChange' => $onRowSelectionChange,
+                'data' => $this->data,
+                'columns' => $this->columns,
+                'state' => $this->state,
+                'onRowSelectionChange' => fn($rows) => $this->dispatch('table-event', ['type' => 'rowSelection', 'data' => $rows]),
+                'onColumnFiltersChange' => fn($filters) => $this->dispatch('table-event', ['type' => 'columnFilters', 'data' => $filters]),
+                'onGlobalFilterChange' => fn($filter) => $this->dispatch('table-event', ['type' => 'globalFilter', 'data' => $filter]),
+                'onPaginationChange' => fn($pagination) => $this->dispatch('table-event', ['type' => 'pagination', 'data' => $pagination]),
+                'onSortingChange' => fn($sorting) => $this->dispatch('table-event', ['type' => 'sorting', 'data' => $sorting]),
+                'onGroupingChange' => fn($grouping) => $this->dispatch('table-event', ['type' => 'grouping', 'data' => $grouping]),
+                'onColumnVisibilityChange' => fn($visibility) => $this->dispatch('table-event', ['type' => 'columnVisibility', 'data' => $visibility]),
+                'onRowExpansionChange' => fn($expansion) => $this->dispatch('table-event', ['type' => 'rowExpansion', 'data' => $expansion]),
             ]
         );
     }
