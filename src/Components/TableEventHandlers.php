@@ -34,8 +34,8 @@ class RowSelectionEventHandler implements TableEventHandler {
                     $component->$method($selectedRows);
                 }
             } else {
-                // Handle direct Mingle event dispatch
-                $this->wire->$dispatch($this->callback, ['rows' => $selectedRows]);
+                // Handle direct event dispatch
+                $this->dispatch($this->callback, ['rows' => $selectedRows]);
             }
         }
     }
