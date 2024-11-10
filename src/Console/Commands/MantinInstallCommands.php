@@ -51,6 +51,9 @@ class MantineInstallCommand extends Command
         Process::run("composer require ijpatricio/mingle", function (string $type, string $output) {
             echo $output;
         })->throw();
+
+        $this->info("\nRunning Mingle installer...");
+        Artisan::call('mingle:install');
     }
 
     protected function setupReactMantine(string $packageManagerCommand)
