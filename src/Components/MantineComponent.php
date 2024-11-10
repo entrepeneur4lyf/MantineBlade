@@ -12,14 +12,14 @@ abstract class MantineComponent extends Component implements HasMingles
 
     /**
      * The component's class name.
+     *
+     * @var string
      */
     protected string $componentName;
 
     /**
      * The component's props.
-     */
-    protected array $props = [];
-
+     *
     /**
      * Create a new component instance.
      */

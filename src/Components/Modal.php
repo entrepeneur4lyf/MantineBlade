@@ -2,10 +2,67 @@
 
 namespace MantineBlade\Components;
 
+/**
+ * Modal Component
+ *
+ * The Modal component is used to display content in a modal dialog. It can be customized with
+ * various properties such as title, size, and visibility.
+ *
+ * @link https://mantine.dev/core/modal/
+ *
+ * @property mixed $opened Determines if the modal is opened
+ * @property mixed $onClose Function called when the modal is closed
+ * @property mixed $title Title of the modal
+ * @property mixed $centered Center the modal on the screen
+ * @property mixed $withCloseButton Show close button
+ * @property mixed $closeButtonProps Props for the close button
+ * @property mixed $overlayProps Props for the overlay
+ * @property mixed $size Size of the modal
+ * @property mixed $fullScreen Fullscreen modal
+ * @property mixed $transitionProps Props for the transition effect
+ * @property mixed $xOffset X offset of the modal
+ * @property mixed $yOffset Y offset of the modal
+ * @property mixed $radius Border radius of the modal
+ * @property mixed $scrollAreaComponent Component for scroll area
+ * @property mixed $trapFocus Trap focus within the modal
+ * @property mixed $closeOnEscape Close modal on escape key
+ * @property mixed $closeOnClickOutside Close modal on outside click
+ * @property mixed $returnFocus Return focus to the element that opened the modal
+ * @property mixed $removeScrollProps Remove scroll props from body
+ * @property mixed $classNames Custom class names for modal elements
+ * @property mixed $styles Custom styles for modal elements
+ *
+ * @example Basic Usage
+ * ```blade
+ * <x-mantine-modal :opened="true" title="My Modal" />
+ * ```
+ */
 class Modal extends MantineComponent
 {
     /**
      * Create a new component instance.
+     *
+     * @param mixed $opened Determines if the modal is opened
+     * @param mixed $onClose Function called when the modal is closed
+     * @param mixed $title Title of the modal
+     * @param mixed $centered Center the modal on the screen
+     * @param mixed $withCloseButton Show close button
+     * @param mixed $closeButtonProps Props for the close button
+     * @param mixed $overlayProps Props for the overlay
+     * @param mixed $size Size of the modal
+     * @param mixed $fullScreen Fullscreen modal
+     * @param mixed $transitionProps Props for the transition effect
+     * @param mixed $xOffset X offset of the modal
+     * @param mixed $yOffset Y offset of the modal
+     * @param mixed $radius Border radius of the modal
+     * @param mixed $scrollAreaComponent Component for scroll area
+     * @param mixed $trapFocus Trap focus within the modal
+     * @param mixed $closeOnEscape Close modal on escape key
+     * @param mixed $closeOnClickOutside Close modal on outside click
+     * @param mixed $returnFocus Return focus to the element that opened the modal
+     * @param mixed $removeScrollProps Remove scroll props from body
+     * @param mixed $classNames Custom class names
+     * @param mixed $styles Custom styles
      */
     public function __construct(
         public mixed $opened = null,
@@ -58,6 +115,19 @@ class Modal extends MantineComponent
     }
 }
 
+/**
+ * ModalRoot Component
+ *
+ * The ModalRoot component is used to manage the modal's state and behavior.
+ *
+ * @property mixed $opened Determines if the modal is opened
+ * @property mixed $onClose Function called when the modal is closed
+ * @property mixed $trapFocus Trap focus within the modal
+ * @property mixed $closeOnEscape Close modal on escape key
+ * @property mixed $closeOnClickOutside Close modal on outside click
+ * @property mixed $returnFocus Return focus to the element that opened the modal
+ * @property mixed $removeScrollProps Remove scroll props from body
+ */
 class ModalRoot extends MantineComponent
 {
     public function __construct(
@@ -83,6 +153,15 @@ class ModalRoot extends MantineComponent
     }
 }
 
+/**
+ * ModalOverlay Component
+ *
+ * The ModalOverlay component is used to display an overlay behind the modal.
+ *
+ * @property mixed $backgroundOpacity Opacity of the overlay background
+ * @property mixed $blur Blur effect for the overlay
+ * @property mixed $color Color of the overlay
+ */
 class ModalOverlay extends MantineComponent
 {
     public function __construct(
@@ -100,6 +179,20 @@ class ModalOverlay extends MantineComponent
     }
 }
 
+/**
+ * ModalContent Component
+ *
+ * The ModalContent component is used to display the content of the modal.
+ *
+ * @property mixed $size Size of the modal content
+ * @property mixed $radius Border radius of the modal content
+ * @property mixed $centered Center the modal content
+ * @property mixed $fullScreen Fullscreen modal content
+ * @property mixed $xOffset X offset of the modal content
+ * @property mixed $yOffset Y offset of the modal content
+ * @property mixed $scrollAreaComponent Component for scroll area
+ * @property mixed $transitionProps Props for the transition effect
+ */
 class ModalContent extends MantineComponent
 {
     public function __construct(
@@ -127,6 +220,11 @@ class ModalContent extends MantineComponent
     }
 }
 
+/**
+ * ModalHeader Component
+ *
+ * The ModalHeader component is used to display the header of the modal.
+ */
 class ModalHeader extends MantineComponent
 {
     public function __construct()
@@ -136,6 +234,11 @@ class ModalHeader extends MantineComponent
     }
 }
 
+/**
+ * ModalTitle Component
+ *
+ * The ModalTitle component is used to display the title of the modal.
+ */
 class ModalTitle extends MantineComponent
 {
     public function __construct()
@@ -145,6 +248,14 @@ class ModalTitle extends MantineComponent
     }
 }
 
+/**
+ * ModalCloseButton Component
+ *
+ * The ModalCloseButton component is used to display a button to close the modal.
+ *
+ * @property mixed $icon Icon for the close button
+ * @property mixed $ariaLabel Accessibility label for the close button
+ */
 class ModalCloseButton extends MantineComponent
 {
     public function __construct(
@@ -160,6 +271,11 @@ class ModalCloseButton extends MantineComponent
     }
 }
 
+/**
+ * ModalBody Component
+ *
+ * The ModalBody component is used to display the body content of the modal.
+ */
 class ModalBody extends MantineComponent
 {
     public function __construct()
