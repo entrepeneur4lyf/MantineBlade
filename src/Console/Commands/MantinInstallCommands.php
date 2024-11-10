@@ -166,41 +166,75 @@ class MantineInstallCommand extends Command
     protected function setupViteConfig()
     {
         $viteConfigPath = base_path('vite.config.js');
-        $stub = File::get(__DIR__ . '/../../../stubs/vite.config.js');
-
+        
         if (!File::exists($viteConfigPath)) {
-            File::put($viteConfigPath, $stub);
-        } else {
-            // Modify existing config to include React plugin and Mingle alias
-            $config = File::get($viteConfigPath);
-            if (!str_contains($config, '@vitejs/plugin-react')) {
-                // Add React plugin to existing config
-                $config = str_replace(
-                    'export default defineConfig({',
-                    "import react from '@vitejs/plugin-react';\n\nexport default defineConfig({",
-                    $config
-                );
-                $config = str_replace(
-                    'plugins: [',
-                    "plugins: [\n\t\treact(),",
-                    $config
-                );
+            throw new RuntimeException('Vite configuration file not found. Please install Livewire first.');
+        }
 
-                // Add Mingle alias
-                $config = str_replace(
-                    'export default defineConfig({',
-                    "import path from 'path';\n\nexport default defineConfig({",
+        $config = File::get($viteConfigPath);
+        
+        // Only add React plugin if not already present
+        if (!str_contains($config, '@vitejs/plugin-react')) {
+            // Add React import if needed
+            if (!str_contains($config, 'import react')) {
+                $config = preg_replace(
+                    '/^(import .+;\n*)/m',
+                    "$1import react from '@vitejs/plugin-react';\n",
                     $config
                 );
-                $config = str_replace(
-                    'export default defineConfig({',
-                    "export default defineConfig({\n\tresolve: {\n\t\talias: {\n\t\t\t\"@mingle\": path.resolve(__dirname, \"/vendor/ijpatricio/mingle/resources/js\"),\n\t\t},\n\t},",
-                    $config
-                );
+            }
+            
+            // Add React to plugins array
+            $config = preg_replace(
+                '/(plugins:\s*\[)/',
+                "$1\n        react(),",
+                $config
+            );
+        }
 
-                File::put($viteConfigPath, $config);
+        // Add path import if needed for alias
+        if (!str_contains($config, 'import path')) {
+            $config = preg_replace(
+                '/^(import .+;\n*)/m',
+                "$1import path from 'path';\n",
+                $config
+            );
+        }
+
+        // Add Mingle alias if not present
+        if (!str_contains($config, '@mingle')) {
+            // Check if resolve section exists
+            if (!str_contains($config, 'resolve:')) {
+                // Add resolve section before plugins
+                $config = preg_replace(
+                    '/(plugins:\s*\[)/',
+                    "resolve: {\n        alias: {\n            '@mingle': path.resolve(__dirname, '/vendor/ijpatricio/mingle/resources/js'),\n        },\n    },\n\n    $1",
+                    $config
+                );
+            } else {
+                // Add to existing resolve.alias section
+                $config = preg_replace(
+                    '/(resolve:\s*{(?:[^}]+alias:\s*{[^}]*})?[^}]*})/s',
+                    function ($matches) {
+                        if (str_contains($matches[1], 'alias:')) {
+                            return preg_replace(
+                                '/(alias:\s*{)/',
+                                "$1\n            '@mingle': path.resolve(__dirname, '/vendor/ijpatricio/mingle/resources/js'),",
+                                $matches[1]
+                            );
+                        }
+                        return str_replace(
+                            'resolve: {',
+                            "resolve: {\n        alias: {\n            '@mingle': path.resolve(__dirname, '/vendor/ijpatricio/mingle/resources/js'),\n        },",
+                            $matches[1]
+                        );
+                    },
+                    $config
+                );
             }
         }
+
+        File::put($viteConfigPath, $config);
     }
 
     protected function publishConfig()
