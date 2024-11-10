@@ -132,6 +132,7 @@ class ReactTable extends MantineComponent
     private ?array $lazyLoadingConfig = null;
     
     private const ALLOWED_FEATURES = [
+        // Basic Features
         'enableColumnFiltering' => 'bool',
         'enableColumnFilterModes' => 'bool',
         'enableColumnOrdering' => 'bool',
@@ -150,13 +151,30 @@ class ReactTable extends MantineComponent
         'enableFullScreenToggle' => 'bool',
         'enableHiding' => 'bool',
         'enableClickToCopy' => 'bool',
+        
+        // Advanced Features
+        'enableGrouping' => 'bool',
+        'enableExpandAll' => 'bool',
+        'enableRowNumbers' => 'bool',
+        'enableRowActions' => 'bool',
+        'enableColumnGrouping' => 'bool',
+        'enableAggregationFunctions' => 'bool',
+        'enableRowDetail' => 'bool',
+        'enableToolbarCustomActions' => 'bool',
+        'enableDataExport' => 'bool',
+        'enableColumnVirtualization' => 'bool',
+        'manualGrouping' => 'bool',
+        
+        // Display Modes
         'selectDisplayMode' => ['checkbox', 'radio', 'switch'],
         'selectAllMode' => ['page', 'all'],
-        'layoutMode' => ['semantic', 'grid'],
-        'paginationDisplayMode' => ['default', 'pages', 'custom'],
+        'layoutMode' => ['semantic', 'grid', 'compact'],
+        'paginationDisplayMode' => ['default', 'pages', 'custom', 'infinite'],
         'columnFilterDisplayMode' => ['subheader', 'popover', 'custom'],
         'editDisplayMode' => ['modal', 'row', 'cell', 'table', 'custom'],
-        'createDisplayMode' => ['modal', 'row', 'custom']
+        'createDisplayMode' => ['modal', 'row', 'custom'],
+        'groupDisplayMode' => ['default', 'collapsed', 'expanded'],
+        'exportDisplayMode' => ['menu', 'buttons', 'custom']
     ];
 
     public function __construct(
@@ -398,8 +416,24 @@ class ReactTable extends MantineComponent
      * @param array<string,callable> $functions Map of column keys to aggregation functions
      * @return self
      */
+    /**
+     * Configure aggregation functions for grouped columns
+     *
+     * @param array<string,callable> $functions Map of column keys to aggregation functions
+     * @return self
+     * @throws InvalidArgumentException If invalid aggregation function provided
+     */
     public function setAggregationFunctions(array $functions): self
     {
+        foreach ($functions as $column => $function) {
+            if (!is_callable($function)) {
+                throw new InvalidArgumentException(
+                    "Aggregation function for column '$column' must be callable"
+                );
+            }
+        }
+        
+        $this->tableFeatures['enableAggregationFunctions'] = true;
         $this->aggregationFunctions = $functions;
         return $this;
     }
@@ -459,8 +493,29 @@ class ReactTable extends MantineComponent
      * @param array<string,array{groupName:string,aggregationFn?:callable}> $groupingConfig
      * @return self
      */
+    /**
+     * Configure column grouping with validation
+     *
+     * @param array<string,array{groupName:string,aggregationFn?:callable}> $groupingConfig
+     * @return self
+     * @throws InvalidArgumentException If invalid grouping configuration provided
+     */
     public function configureColumnGrouping(array $groupingConfig): self
     {
+        foreach ($groupingConfig as $column => $config) {
+            if (!isset($config['groupName'])) {
+                throw new InvalidArgumentException(
+                    "Missing required 'groupName' for column '$column' grouping"
+                );
+            }
+            
+            if (isset($config['aggregationFn']) && !is_callable($config['aggregationFn'])) {
+                throw new InvalidArgumentException(
+                    "Aggregation function for column '$column' must be callable"
+                );
+            }
+        }
+        
         $this->tableFeatures['enableColumnGrouping'] = true;
         $this->columnGroupingConfig = $groupingConfig;
         return $this;

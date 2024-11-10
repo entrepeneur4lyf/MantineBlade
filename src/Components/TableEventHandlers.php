@@ -61,7 +61,15 @@ class SortingEventHandler implements TableEventHandler {
 }
 
 /**
- * Handles column grouping events
+ * Handles column grouping events in the table
+ * 
+ * Manages the grouping state changes when users group data by columns.
+ * The handler receives grouping information including:
+ * - Column IDs being grouped
+ * - Grouping direction/order
+ * - Aggregation functions applied to groups
+ * 
+ * @implements TableEventHandler
  */
 class GroupingEventHandler implements TableEventHandler {
     public function __construct(private callable $callback) {}
@@ -72,7 +80,14 @@ class GroupingEventHandler implements TableEventHandler {
 }
 
 /**
- * Handles column visibility changes
+ * Handles column visibility state changes
+ * 
+ * Manages visibility toggles for table columns, receiving:
+ * - Column IDs and their visibility states
+ * - Show/hide events from column selector
+ * - Visibility preset applications
+ * 
+ * @implements TableEventHandler
  */
 class ColumnVisibilityEventHandler implements TableEventHandler {
     public function __construct(private callable $callback) {}
@@ -83,7 +98,15 @@ class ColumnVisibilityEventHandler implements TableEventHandler {
 }
 
 /**
- * Handles row expansion state changes
+ * Handles row expansion state changes in the table
+ * 
+ * Manages expandable rows functionality, receiving:
+ * - Row IDs being expanded/collapsed
+ * - Expansion depth for nested structures
+ * - Detail panel render triggers
+ * - Expand/collapse all events
+ * 
+ * @implements TableEventHandler
  */
 class RowExpansionEventHandler implements TableEventHandler {
     public function __construct(private callable $callback) {}
