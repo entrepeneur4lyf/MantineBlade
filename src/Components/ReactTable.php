@@ -62,14 +62,13 @@ use MantineBlade\Traits\WithTableHooks;
 class ReactTable extends Component
 {
     use WithTableHooks;
-{
     /**
      * Default table feature configuration
      * 
      * @var array<string, bool|string>
      */
     protected array $tableFeatures = [
-        // Existing features
+        // Basic Features
         'enableColumnFiltering' => false,
         'enableColumnFilterModes' => false,
         'enableColumnOrdering' => false,
@@ -89,7 +88,7 @@ class ReactTable extends Component
         'enableHiding' => true,
         'enableClickToCopy' => false,
         
-        // New features
+        // Advanced Features
         'enableGrouping' => false,
         'enableExpandAll' => false,
         'enableRowNumbers' => false,
@@ -102,32 +101,16 @@ class ReactTable extends Component
         'enableColumnVirtualization' => false,
         'manualGrouping' => false,
         
-        // Display modes
-        'enableColumnFiltering' => false,
-        'enableColumnFilterModes' => false,
-        'enableColumnOrdering' => false,
-        'enableColumnPinning' => false,
-        'enableColumnResizing' => false,
-        'enableRowSelection' => false,
-        'enableMultiRowSelection' => false,
-        'enablePagination' => true,
-        'paginateExpandedRows' => true,
-        'enableSorting' => true,
-        'enableMultiSort' => false,
-        'enableGlobalFilter' => true,
-        'enableGlobalFilterModes' => true,
-        'enableColumnActions' => true,
-        'enableDensityToggle' => true,
-        'enableFullScreenToggle' => true,
-        'enableHiding' => true,
-        'enableClickToCopy' => false,
+        // Display Modes
         'selectDisplayMode' => 'checkbox',
         'selectAllMode' => 'page',
         'layoutMode' => 'semantic',
         'paginationDisplayMode' => 'default',
         'columnFilterDisplayMode' => 'subheader',
         'editDisplayMode' => 'modal',
-        'createDisplayMode' => 'modal'
+        'createDisplayMode' => 'modal',
+        'groupDisplayMode' => 'default',
+        'exportDisplayMode' => 'menu'
     ];
 
     /**
@@ -190,9 +173,10 @@ class ReactTable extends Component
     #[Reactive]
     public array|null $columns = null;
 
+    protected ?array $columnGroupingConfig = null;
+    protected ?array $exportFormats = null;
+
     public function mount(
-        // Execute before mount hooks
-        $this->executeHooks('beforeMount');
         array|Collection|null $data = null,
         array|null $columns = null,
         ?array $features = null,
