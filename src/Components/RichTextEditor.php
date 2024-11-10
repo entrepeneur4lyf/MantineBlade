@@ -31,22 +31,69 @@ class RichTextEditor extends MantineComponent
      */
     public function __construct(
         public mixed $editor = null,
+        public mixed $content = null,
         public mixed $withTypographyStyles = true,
         public mixed $labels = null,
         public mixed $stickyOffset = null,
         public mixed $classNames = null,
         public mixed $styles = null,
+        public mixed $sanitize = false,
     ) {
         parent::__construct();
 
+        // Initialize Tiptap editor if content is provided
+        if ($this->content) {
+            $tiptap = new \Tiptap\Editor();
+            
+            // Sanitize content if requested
+            if ($this->sanitize) {
+                $this->content = $tiptap->sanitize($this->content);
+            }
+
+            // Convert HTML to Tiptap JSON if HTML content provided
+            if (is_string($this->content) && str_contains($this->content, '<')) {
+                $this->content = $tiptap->setContent($this->content)->getDocument();
+            }
+        }
+
         $this->props = [
             'editor' => $editor,
+            'content' => $this->content,
             'withTypographyStyles' => $withTypographyStyles,
             'labels' => $labels,
             'stickyOffset' => $stickyOffset,
             'classNames' => $classNames,
             'styles' => $styles,
         ];
+    }
+
+    /**
+     * Get the editor content as HTML
+     *
+     * @return string
+     */
+    public function getHTML()
+    {
+        if (!$this->content) {
+            return '';
+        }
+
+        return (new \Tiptap\Editor)->setContent($this->content)->getHTML();
+    }
+
+    /**
+     * Get the editor content as plain text
+     * 
+     * @param array $options Options for text conversion
+     * @return string
+     */
+    public function getText($options = [])
+    {
+        if (!$this->content) {
+            return '';
+        }
+
+        return (new \Tiptap\Editor)->setContent($this->content)->getText($options);
     }
 }
 

@@ -28,7 +28,23 @@ class ExampleRichTextEditor extends Component
      *
      * @var string
      */
-    public $content = '<h2 style="text-align: center;">Welcome to Mantine rich text editor</h2><p>This editor provides a familiar editing experience with various formatting options:</p><ul><li>Text formatting: <strong>bold</strong>, <em>italic</em>, <u>underline</u></li><li>Lists and headings</li><li>Links and quotes</li><li>And more...</li></ul>';
+    public $content;
+
+    public function mount()
+    {
+        // Initialize with HTML content and sanitize it
+        $this->content = (new \Tiptap\Editor)->sanitize(
+            '<h2 style="text-align: center;">Welcome to Mantine rich text editor</h2>' .
+            '<p>This editor provides a familiar editing experience with various formatting options:</p>' .
+            '<ul>' .
+            '<li>Text formatting: <strong>bold</strong>, <em>italic</em>, <u>underline</u></li>' .
+            '<li>Lists and headings</li>' .
+            '<li>Links and quotes</li>' .
+            '<li>And more...</li>' .
+            '</ul>' .
+            '<script>alert("malicious code")</script>' // This will be stripped out
+        );
+    }
 
     /**
      * Render the component
