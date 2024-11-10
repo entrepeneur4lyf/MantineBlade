@@ -8,7 +8,7 @@ namespace MantineBlade\Components;
  * The Marquee component creates a scrolling content effect, commonly used for displaying
  * testimonials, logos, or any content that needs to continuously scroll.
  *
- * @link https://mantine.dev/core/marquee/
+ * @link https://gfazioli.github.io/mantine-marquee/
  *
  * @property mixed $w Width of the marquee container
  * @property mixed $h Height of the marquee container
