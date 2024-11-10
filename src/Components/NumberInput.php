@@ -2,10 +2,86 @@
 
 namespace MantineBlade\Components;
 
+/**
+ * NumberInput component for handling numeric input with various formatting options.
+ *
+ * The NumberInput component provides a controlled input field for numbers with
+ * support for validation, formatting, and increment/decrement controls.
+ *
+ * @see https://mantine.dev/core/number-input/
+ *
+ * @example Basic usage
+ * ```blade
+ * <x-mantine-number-input
+ *     label="Enter amount"
+ *     :min="0"
+ *     :max="100"
+ *     :default-value="50"
+ * />
+ * ```
+ *
+ * @example With currency formatting
+ * ```blade
+ * <x-mantine-number-input
+ *     label="Price"
+ *     prefix="$"
+ *     :decimal-scale="2"
+ *     :allow-decimal="true"
+ *     :thousand-separator=","
+ * />
+ * ```
+ *
+ * @example Custom controls and sections
+ * ```blade
+ * <x-mantine-number-input
+ *     label="Quantity"
+ *     :step="5"
+ *     :step-hold-delay="500"
+ *     :left-section="'📦'"
+ *     :right-section="'units'"
+ * />
+ * ```
+ */
 class NumberInput extends MantineComponent
 {
     /**
-     * Create a new component instance.
+     * Create a new NumberInput component instance.
+     *
+     * @param string|null $label Label displayed above the input
+     * @param string|null $description Additional text displayed below the input
+     * @param string|null $error Error message displayed below the input
+     * @param string|null $placeholder Placeholder text when input is empty
+     * @param mixed $min Minimum allowed value
+     * @param mixed $max Maximum allowed value
+     * @param string|null $clampBehavior Controls value behavior when it exceeds min/max ('strict' or 'blur')
+     * @param string|null $prefix Text added before the input value
+     * @param string|null $suffix Text added after the input value
+     * @param bool|null $allowNegative Whether negative values are allowed
+     * @param bool|null $allowDecimal Whether decimal values are allowed
+     * @param int|null $decimalScale Number of digits after decimal point
+     * @param bool|null $fixedDecimalScale Whether to always show decimal places
+     * @param string|null $decimalSeparator Character to use as decimal separator
+     * @param string|null $thousandSeparator Character to use as thousand separator
+     * @param string|null $thousandsGroupStyle Number grouping style ('thousand', 'lakh', 'wan')
+     * @param mixed $leftSection Content displayed on the left side of the input
+     * @param mixed $rightSection Content displayed on the right side of the input
+     * @param string|null $leftSectionWidth Width of the left section
+     * @param string|null $rightSectionWidth Width of the right section
+     * @param string|null $leftSectionPointerEvents Whether left section should capture pointer events
+     * @param string|null $rightSectionPointerEvents Whether right section should capture pointer events
+     * @param bool|null $hideControls Whether to hide increment/decrement controls
+     * @param int|null $stepHoldDelay Delay before stepping starts when button is held
+     * @param mixed $stepHoldInterval Interval between steps when button is held
+     * @param mixed $step Value increment/decrement step
+     * @param string|null $variant Input variant ('default', 'filled', 'unstyled')
+     * @param string|null $size Input size ('xs', 'sm', 'md', 'lg', 'xl')
+     * @param string|null $radius Border radius ('xs', 'sm', 'md', 'lg', 'xl')
+     * @param bool|null $disabled Whether the input is disabled
+     * @param mixed $value Controlled input value
+     * @param mixed $defaultValue Default value when uncontrolled
+     * @param bool|null $required Whether the input is required
+     * @param bool|null $withAsterisk Whether to show required asterisk
+     * @param mixed $handlersRef Reference to input handlers
      */
     public function __construct(
         public ?string $label = null,
