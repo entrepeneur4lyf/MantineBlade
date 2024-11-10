@@ -119,38 +119,10 @@ class RichTextEditor extends MantineComponent
      * @param array $options Additional options for HTML conversion
      * @return string
      */
-    public function getHTML(array $options = [])
+    public function getHTML()
     {
-        if (!$this->content) {
-            return '';
-        }
-
-        $editor = new \Tiptap\Editor;
-        
-        // Configure extensions based on enabled features
-        if ($this->enableTables) {
-            $editor->addExtension(new \Tiptap\Extensions\Table([
-                'rows' => $this->tableRows,
-                'cols' => $this->tableCols,
-            ]));
-        }
-        
-        if ($this->enableMentions) {
-            $editor->addExtension(new \Tiptap\Extensions\Mention([
-                'suggestions' => $this->mentionSuggestions,
-                'char' => $this->mentionChar,
-            ]));
-        }
-        
-        if ($this->enableEmoji) {
-            $editor->addExtension(new \Tiptap\Extensions\Emoji());
-        }
-
-        if ($this->sanitize) {
-            $editor->addExtension(new \Tiptap\Extensions\TextCleaner());
-        }
-
-        return $editor->setContent($this->content)->getHTML($options);
+        // Content handling is managed client-side by TipTap React
+        return $this->content ?? '';
     }
 
     /**
