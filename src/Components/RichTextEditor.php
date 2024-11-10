@@ -81,8 +81,24 @@ class RichTextEditor extends MantineComponent
     ) {
         parent::__construct();
 
-        // Content handling is managed by TipTap React on the client side
-        $this->content = $content;
+        // Initialize TipTap editor with content
+        $this->editor = new \Tiptap\Editor([
+            'content' => $content,
+            'extensions' => [
+                new \Tiptap\Extensions\StarterKit([
+                    'heading' => [
+                        'levels' => [1, 2, 3, 4, 5, 6]
+                    ]
+                ]),
+                new \Tiptap\Marks\Link,
+                new \Tiptap\Extensions\TextAlign,
+                new \Tiptap\Extensions\Typography,
+                new \Tiptap\Extensions\Placeholder,
+                new \Tiptap\Extensions\CharacterCount,
+            ]
+        ]);
+        
+        $this->content = $this->editor->getDocument();
 
         $this->props = [
             'editor' => $editor,
@@ -104,13 +120,11 @@ class RichTextEditor extends MantineComponent
     /**
      * Get the editor content as HTML
      *
-     * @param array $options Additional options for HTML conversion
      * @return string
      */
     public function getHTML()
     {
-        // Content handling is managed client-side by TipTap React
-        return $this->content ?? '';
+        return $this->editor->getHTML();
     }
 
     /**
@@ -121,11 +135,17 @@ class RichTextEditor extends MantineComponent
      */
     public function getText($options = [])
     {
-        if (!$this->content) {
-            return '';
-        }
+        return $this->editor->getText($options);
+    }
 
-        return (new \Tiptap\Editor)->setContent($this->content)->getText($options);
+    /**
+     * Get the editor content as a Tiptap-compatible array
+     *
+     * @return array
+     */
+    public function getDocument()
+    {
+        return $this->editor->getDocument();
     }
 }
 
