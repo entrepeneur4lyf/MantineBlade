@@ -171,8 +171,43 @@ class MantineInstallCommand extends Command
             throw new RuntimeException('Vite configuration file not found. Please install Livewire first.');
         }
 
-        // Copy the stub vite config directly
-        File::copy(__DIR__ . '/../../../stubs/vite.config.js', $viteConfigPath);
+        $content = File::get($viteConfigPath);
+
+        // Add imports if they don't exist
+        if (!str_contains($content, 'import react from')) {
+            $content = "import react from '@vitejs/plugin-react';\n" . $content;
+        }
+        if (!str_contains($content, 'import findMingles')) {
+            $content = "import findMingles from './vendor/ijpatricio/mingle/resources/js/autoImport.js';\n" . $content;
+        }
+
+        // Add mingles configuration
+        if (!str_contains($content, 'const mingles')) {
+            $content = preg_replace(
+                '/export default defineConfig\({/',
+                "const mingles = findMingles('resources/js')\n\nexport default defineConfig({",
+                $content
+            );
+        }
+
+        // Update plugins section
+        $content = preg_replace(
+            '/plugins:\s*\[(.*?)\]/s',
+            'plugins: [
+        react(),
+        laravel({
+            input: [
+                \'resources/js/app.js\',
+                \'resources/css/app.css\',
+                ...mingles.map(mingle => `resources/js/${mingle.input}.js`),
+            ],
+            refresh: true,
+        }),
+    ]',
+            $content
+        );
+
+        File::put($viteConfigPath, $content);
     }
 
     protected function publishConfig()
