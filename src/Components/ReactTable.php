@@ -220,9 +220,9 @@ class ReactTable extends Component
 
         $this->state = $state ?? [];
         
-        // Configure Mingle event listeners
-        $this->js('table-event', function($event, $detail) {
-            $this->handleTableEvent($event, $detail);
+        // Configure Mingle event listeners using wire
+        $this->wire->on('table-event', function($event) {
+            $this->handleTableEvent($event['type'], $event);
         });
         
         $this->props = array_merge(

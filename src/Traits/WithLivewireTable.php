@@ -50,8 +50,8 @@ trait WithLivewireTable
             $this->$method($payload['data']);
         }
         
-        // Emit state update event for Mingle
-        $this->dispatch('table-state-updated', [
+        // Emit state update event using Mingle wire.$dispatch
+        $this->wire->$dispatch('table-state-updated', [
             'event' => $event,
             'data' => $payload['data']
         ]);
