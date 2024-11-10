@@ -2,6 +2,63 @@
 
 namespace MantineBlade\Components;
 
+/**
+ * YearPicker component - A date picker component specialized for selecting years.
+ *
+ * The YearPicker allows users to select a single year, multiple years, or a range of years.
+ * It provides various customization options for date constraints, formatting, and styling.
+ *
+ * @see https://mantine.dev/dates/year-picker/
+ *
+ * @example Basic usage with single year selection
+ * ```blade
+ * <x-mantine-year-picker
+ *     placeholder="Pick a year"
+ *     :value="$selectedYear"
+ * />
+ * ```
+ *
+ * @example Range selection with min/max constraints
+ * ```blade
+ * <x-mantine-year-picker
+ *     type="range"
+ *     placeholder="Select years"
+ *     :min-date="new Date('2020-01-01')"
+ *     :max-date="new Date('2030-12-31')"
+ * />
+ * ```
+ *
+ * @example Multiple years selection with custom styling
+ * ```blade
+ * <x-mantine-year-picker
+ *     type="multiple"
+ *     placeholder="Select multiple years"
+ *     :number-of-columns="2"
+ *     size="lg"
+ *     :years-list-format="'YYYY'"
+ * />
+ * ```
+ *
+ * @param mixed $value Current picker value
+ * @param mixed $defaultValue Default value for uncontrolled component
+ * @param mixed $onChange Callback for value change
+ * @param mixed $type Picker type: 'default', 'range', or 'multiple'
+ * @param mixed $allowDeselect Allow deselecting value by clicking selected year
+ * @param mixed $allowSingleDateInRange Allow selecting single date as range
+ * @param mixed $defaultDate Default date shown on picker
+ * @param mixed $date Current date shown on picker
+ * @param mixed $onDateChange Callback for date change
+ * @param mixed $minDate Minimum possible date to select
+ * @param mixed $maxDate Maximum possible date to select
+ * @param mixed $getYearControlProps Function to add props to year control
+ * @param mixed $numberOfColumns Number of columns to show in picker
+ * @param mixed $size Controls size of year controls
+ * @param mixed $yearsListFormat Format of years list labels
+ * @param mixed $decadeLabelFormat Format of decade label
+ * @param mixed $ariaLabels Aria labels for controls
+ * @param mixed $classNames Custom class names for picker elements
+ * @param mixed $styles Custom styles for picker elements
+ */
 class YearPicker extends MantineComponent
 {
     /**
