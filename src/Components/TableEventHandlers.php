@@ -26,8 +26,8 @@ class RowSelectionEventHandler implements TableEventHandler {
     public function handle(mixed $selectedRows): void {
         if ($this->callback instanceof \Closure) {
             ($this->callback)($selectedRows);
-        } elseif (is_string($this->callback) && str_contains($this->callback, '.') && class_exists(\Livewire\Component::class)) {
-            // Handle Livewire method calls only when Livewire is available
+        } elseif (is_string($this->callback) && str_contains($this->callback, '.')) {
+            // Handle Livewire method calls
             [$component, $method] = explode('.', $this->callback);
             if (method_exists($component, $method)) {
                 $component->$method($selectedRows);

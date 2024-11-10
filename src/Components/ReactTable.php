@@ -55,7 +55,10 @@ use Illuminate\Support\Collection;
  * />
  * ```
  */
-class ReactTable extends \MantineBlade\Components\MantineComponent
+use Livewire\Component;
+use Livewire\Attributes\Reactive;
+
+class ReactTable extends Component
 {
     /**
      * Default table feature configuration
@@ -178,7 +181,10 @@ class ReactTable extends \MantineBlade\Components\MantineComponent
         'exportDisplayMode' => ['menu', 'buttons', 'custom']
     ];
 
+    #[Reactive]
     public array|Collection|null $data = null;
+    
+    #[Reactive]
     public array|null $columns = null;
 
     public function mount(
