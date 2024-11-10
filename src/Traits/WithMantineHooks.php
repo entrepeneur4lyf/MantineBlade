@@ -102,12 +102,29 @@ trait WithMantineHooks
      */
     public function mountMantineHooks(): void
     {
-        foreach ($this->mantineHooks as $hookName => $config) {
-            $this->dispatchBrowserEvent('mantine-init-hook', [
-                'hook' => $hookName,
-                'config' => $config
+        if (!empty($this->mantineHooks)) {
+            $this->dispatchBrowserEvent('mantine-init-hooks', [
+                'hooks' => array_keys($this->mantineHooks),
+                'configs' => $this->mantineHookConfigs
             ]);
         }
+    }
+
+    /**
+     * Boot the trait
+     */
+    public function bootWithMantineHooks(): void
+    {
+        $this->mantineHooks = [];
+        $this->mantineHookConfigs = [];
+    }
+
+    /**
+     * Cleanup hooks on component destroy
+     */
+    public function destroyMantineHooks(): void
+    {
+        $this->dispatchBrowserEvent('mantine-destroy-hooks');
     }
 
     /**

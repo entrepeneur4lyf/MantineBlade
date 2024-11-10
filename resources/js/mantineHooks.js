@@ -156,12 +156,14 @@ export function setupMantineHook(hookName, el, component) {
         return;
     }
 
-    const config = component.get(`${hookName}Config`) || {};
+    const hookConfig = component.get('mantineHookConfigs')[hookName] || {};
+    const { handler: handlerName, ...config } = hookConfig;
     
-    const handler = (...args) => {
-        component.call(`handle${hookName.charAt(0).toUpperCase() + hookName.slice(1)}`, ...args);
-    };
+    // Set up the handler if specified
+    const handler = handlerName 
+        ? (...args) => component.call(handlerName, ...args)
+        : undefined;
 
-    // Apply the hook with configuration
-    return MANTINE_HOOKS[hookName](handler, config);
+    // Apply the hook with configuration and handler
+    return MANTINE_HOOKS[hookName](config, handler);
 }
