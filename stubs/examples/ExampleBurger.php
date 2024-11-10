@@ -4,15 +4,62 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Burger Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Burger component.
+ * It showcases different states, sizes, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic burger menu
+ * - Different sizes
+ * - Custom line thickness
+ * - Custom colors
+ * - Transition duration
+ * - Disabled state
+ * - Accessibility features
+ * - Navigation menu integration
+ *
+ * @see \MantineBlade\Components\Burger
+ * @link https://mantine.dev/core/burger/
+ */
 class ExampleBurger extends Component
 {
+    /**
+     * Controls the opened/closed state of the burger menu
+     *
+     * @var bool
+     */
     public $opened = false;
 
+    /**
+     * Toggle the burger menu state
+     *
+     * @return void
+     */
     public function toggle()
     {
         $this->opened = !$this->opened;
     }
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic burger menu with toggle functionality
+     * 2. Size variations from xs to xl
+     * 3. Custom line thickness
+     * 4. Custom colors
+     * 5. Custom transition duration
+     * 6. Disabled state
+     * 7. Accessibility integration
+     * 8. Navigation menu example
+     *
+     * Each example showcases different features and customization
+     * options available with the Burger component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

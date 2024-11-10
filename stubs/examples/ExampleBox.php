@@ -4,8 +4,42 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Box Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Box component.
+ * It showcases different layout patterns, spacing utilities, and styling options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic box usage
+ * - Element type variations
+ * - Margin and padding utilities
+ * - Custom styling
+ * - Layout containers
+ * - Responsive styles
+ * - Interactive effects
+ *
+ * @see \MantineBlade\Components\Box
+ * @link https://mantine.dev/core/box/
+ */
 class ExampleBox extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic box with background and padding
+     * 2. Box as different HTML elements (link, button)
+     * 3. Various margin and padding combinations
+     * 4. Custom styles with hover effects
+     * 5. Box as a grid layout container
+     * 6. Responsive styling
+     *
+     * Each example showcases different features and customization
+     * options available with the Box component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

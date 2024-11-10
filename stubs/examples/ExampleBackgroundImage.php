@@ -4,8 +4,38 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example BackgroundImage Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade BackgroundImage component.
+ * It showcases different layouts, content positioning, and styling options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic background image usage
+ * - Different border radius options
+ * - Link functionality
+ * - Custom content layouts
+ * - Integration with other Mantine components
+ *
+ * @see \MantineBlade\Components\BackgroundImage
+ * @link https://mantine.dev/core/background-image/
+ */
 class ExampleBackgroundImage extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic background image with centered text
+     * 2. Different border radius variations
+     * 3. Background image as a clickable link
+     * 4. Complex layout with header and footer content
+     *
+     * Each example showcases different features and customization
+     * options available with the BackgroundImage component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

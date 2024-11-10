@@ -4,8 +4,43 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Card Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Card component.
+ * It showcases different layouts, content organization, and interactive features through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic card layout
+ * - Card as a link
+ * - Section borders and padding
+ * - Image integration
+ * - Custom content organization
+ * - Interactive menus
+ * - Grid layouts
+ * - Responsive design
+ *
+ * @see \MantineBlade\Components\Card
+ * @link https://mantine.dev/core/card/
+ */
 class ExampleCard extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic card with image and content
+     * 2. Card as a clickable link
+     * 3. Card with section borders and padding
+     * 4. Card with menu integration
+     * 5. Card with image grid
+     * 6. Card with custom header/footer
+     *
+     * Each example showcases different features and customization
+     * options available with the Card component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

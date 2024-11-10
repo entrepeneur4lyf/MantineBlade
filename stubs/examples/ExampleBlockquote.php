@@ -4,8 +4,40 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Blockquote Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Blockquote component.
+ * It showcases different styles, icons, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic blockquote usage
+ * - Different color variations
+ * - Custom icon sizes
+ * - Border radius options
+ * - Integration with ThemeIcon
+ * - Citation formatting
+ *
+ * @see \MantineBlade\Components\Blockquote
+ * @link https://mantine.dev/core/blockquote/
+ */
 class ExampleBlockquote extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic blockquote with icon and citation
+     * 2. Different color variations with matching icons
+     * 3. Icon size variations
+     * 4. Different border radius options
+     * 5. Integration with ThemeIcon component
+     *
+     * Each example showcases different features and customization
+     * options available with the Blockquote component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

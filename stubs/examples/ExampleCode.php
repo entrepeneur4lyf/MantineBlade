@@ -4,95 +4,105 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Code Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Code component.
+ * It showcases different styles, layouts, and formatting options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic code display
+ * - Block code formatting
+ * - Different visual variants
+ * - Color customization
+ * - Border radius options
+ * - Custom styling
+ *
+ * @see \MantineBlade\Components\Code
+ * @link https://mantine.dev/core/code/
+ */
 class ExampleCode extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic inline code
+     * 2. Block code with syntax
+     * 3. Different visual variants
+     * 4. Custom colors
+     * 5. Border radius variations
+     * 6. Custom styling options
+     *
+     * Each example showcases different features and customization
+     * options available with the Code component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'
             <div>
-                <!-- Basic inline usage -->
+                <!-- Basic inline code -->
                 <div>
-                    <x-mantine-code>React.createElement()</x-mantine-code>
-                </div>
-
-                <!-- Block code -->
-                <div class="mt-8">
-                    <x-mantine-code :block="true">
-                        import { Code } from '@mantine/core';
-
-                        function Demo() {
-                            return <Code>React.createElement()</Code>;
-                        }
-                    </x-mantine-code>
-                </div>
-
-                <!-- With custom colors -->
-                <div class="mt-8">
-                    <x-mantine-group justify="center">
-                        <x-mantine-code color="blue.9" c="white">
-                            React.createElement()
-                        </x-mantine-code>
-
-                        <x-mantine-code color="var(--mantine-color-blue-light)">
-                            React.createElement()
-                        </x-mantine-code>
-                    </x-mantine-group>
-                </div>
-
-                <!-- Block code with syntax -->
-                <div class="mt-8">
-                    <x-mantine-code :block="true" color="blue.1">
-                        // JavaScript example
-                        const greeting = 'Hello, World!';
-                        console.log(greeting);
-
-                        // Function definition
-                        function add(a, b) {
-                            return a + b;
-                        }
-
-                        // Object example
-                        const user = {
-                            name: 'John Doe',
-                            age: 30,
-                            isAdmin: true
-                        };
-
-                        // Array methods
-                        const numbers = [1, 2, 3, 4, 5];
-                        const doubled = numbers.map(n => n * 2);
-                    </x-mantine-code>
-                </div>
-
-                <!-- Multiple inline examples -->
-                <div class="mt-8">
                     <x-mantine-text>
-                        Here are some common React hooks: 
-                        <x-mantine-code color="grape.6">useState</x-mantine-code>,
-                        <x-mantine-code color="indigo.6">useEffect</x-mantine-code>,
-                        <x-mantine-code color="cyan.6">useContext</x-mantine-code>, and
-                        <x-mantine-code color="pink.6">useReducer</x-mantine-code>.
+                        Use <x-mantine-code>console.log('Hello world')</x-mantine-code> to log messages to the console
                     </x-mantine-text>
                 </div>
 
-                <!-- With different background colors -->
-                <div class="mt-8">
+                <!-- Block code -->
+                <div class="mt-4">
+                    <x-mantine-code :block="true" color="blue">
+                        function hello() {
+                            console.log('Hello world!');
+                            return 'Hello world!';
+                        }
+                    </x-mantine-code>
+                </div>
+
+                <!-- Different variants -->
+                <div class="mt-4">
                     <x-mantine-stack>
-                        <x-mantine-code :block="true" color="dark.4">
-                            // Dark theme code
-                            const darkMode = true;
-                        </x-mantine-code>
-
-                        <x-mantine-code :block="true" color="gray.1">
-                            // Light theme code
-                            const lightMode = true;
-                        </x-mantine-code>
-
-                        <x-mantine-code :block="true" color="blue.1">
-                            // Blue theme code
-                            const blueMode = true;
-                        </x-mantine-code>
+                        <x-mantine-code variant="filled">Filled variant</x-mantine-code>
+                        <x-mantine-code variant="light">Light variant</x-mantine-code>
+                        <x-mantine-code variant="outline">Outline variant</x-mantine-code>
+                        <x-mantine-code variant="transparent">Transparent variant</x-mantine-code>
                     </x-mantine-stack>
+                </div>
+
+                <!-- With custom colors -->
+                <div class="mt-4">
+                    <x-mantine-stack>
+                        <x-mantine-code color="blue">Blue code</x-mantine-code>
+                        <x-mantine-code color="teal">Teal code</x-mantine-code>
+                        <x-mantine-code color="grape">Grape code</x-mantine-code>
+                    </x-mantine-stack>
+                </div>
+
+                <!-- With different radius -->
+                <div class="mt-4">
+                    <x-mantine-stack>
+                        <x-mantine-code radius="xs">Extra small radius</x-mantine-code>
+                        <x-mantine-code radius="md">Medium radius</x-mantine-code>
+                        <x-mantine-code radius="xl">Extra large radius</x-mantine-code>
+                    </x-mantine-stack>
+                </div>
+
+                <!-- With custom styles -->
+                <div class="mt-4">
+                    <x-mantine-code
+                        :block="true"
+                        :styles="[
+                            'root' => [
+                                'backgroundColor' => 'var(--mantine-color-blue-light)',
+                                'borderLeft' => '4px solid var(--mantine-color-blue-filled)',
+                            ],
+                        ]"
+                    >
+                        // Custom styled code block
+                        const value = 'Hello world';
+                        console.log(value);
+                    </x-mantine-code>
                 </div>
             </div>
         blade;

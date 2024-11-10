@@ -4,8 +4,34 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example BubbleChart Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade BubbleChart component.
+ * It showcases different visualization options and customization features through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic bubble chart
+ * - Custom colors
+ * - Color scheme integration
+ * - Tooltip configuration
+ * - Value formatting
+ * - Grid and text color customization
+ * - Theme-dependent styling
+ *
+ * @see \MantineBlade\Components\BubbleChart
+ * @link https://mantine.dev/charts/bubble-chart/
+ */
 class ExampleBubbleChart extends Component
 {
+    /**
+     * Sample data for bubble chart visualization
+     *
+     * Contains hourly sales data with value determining bubble size,
+     * demonstrating how to structure data for bubble charts.
+     *
+     * @var array
+     */
     public $data = [
         ['hour' => '08:00', 'index' => 1, 'value' => 25],
         ['hour' => '10:00', 'index' => 1, 'value' => 40],
@@ -17,6 +43,23 @@ class ExampleBubbleChart extends Component
         ['hour' => '22:00', 'index' => 1, 'value' => 50],
     ];
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic bubble chart with default settings
+     * 2. Custom color configuration
+     * 3. Color scheme dependent styling
+     * 4. Tooltip customization
+     * 5. Value formatting
+     * 6. Grid and text color customization
+     * 7. Theme integration
+     *
+     * Each example showcases different features and customization
+     * options available with the BubbleChart component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

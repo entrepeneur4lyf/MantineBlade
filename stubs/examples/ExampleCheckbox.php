@@ -4,21 +4,74 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Checkbox Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Checkbox component.
+ * It showcases different states, styles, and interactive features through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic checkbox usage
+ * - Description and error states
+ * - Different variants
+ * - Custom icon colors
+ * - Indeterminate state
+ * - Group selection control
+ * - Label with links
+ *
+ * @see \MantineBlade\Components\Checkbox
+ * @link https://mantine.dev/core/checkbox/
+ */
 class ExampleCheckbox extends Component
 {
+    /**
+     * Controls the checked state of individual checkbox
+     *
+     * @var bool
+     */
     public bool $checked = false;
+
+    /**
+     * Controls the state of notification preferences
+     *
+     * @var array
+     */
     public array $notifications = [
         'email' => false,
         'sms' => false,
         'push' => false,
     ];
 
+    /**
+     * Toggle all notification preferences
+     *
+     * Demonstrates the use of indeterminate state by checking if all, some,
+     * or no notifications are enabled.
+     *
+     * @return void
+     */
     public function toggleAll()
     {
         $allChecked = collect($this->notifications)->every(fn($value) => $value);
         $this->notifications = array_fill_keys(array_keys($this->notifications), !$allChecked);
     }
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic checkbox with label
+     * 2. Checkbox with description and error
+     * 3. Different visual variants
+     * 4. Custom icon color
+     * 5. Indeterminate state example
+     * 6. Label with embedded link
+     *
+     * Each example showcases different features and customization
+     * options available with the Checkbox component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

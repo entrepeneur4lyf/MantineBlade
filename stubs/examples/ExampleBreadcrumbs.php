@@ -4,8 +4,41 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Breadcrumbs Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Breadcrumbs component.
+ * It showcases different styles, separators, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic breadcrumbs navigation
+ * - Custom separators
+ * - Unstyled variant
+ * - Custom styling
+ * - Dynamic items
+ * - Icon integration
+ *
+ * @see \MantineBlade\Components\Breadcrumbs
+ * @link https://mantine.dev/core/breadcrumbs/
+ */
 class ExampleBreadcrumbs extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic breadcrumbs with links
+     * 2. Custom separator with margin
+     * 3. Unstyled breadcrumbs
+     * 4. Custom styled breadcrumbs
+     * 5. Dynamic breadcrumb generation
+     * 6. Icon integration in breadcrumbs
+     *
+     * Each example showcases different features and customization
+     * options available with the Breadcrumbs component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

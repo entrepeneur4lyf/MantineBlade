@@ -4,8 +4,45 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Badge Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Badge component.
+ * It showcases different styles, variants, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic badge usage
+ * - Different visual variants
+ * - Gradient styling
+ * - Circular badges
+ * - Section content
+ * - Full width badges
+ * - Auto contrast
+ * - Link functionality
+ *
+ * @see \MantineBlade\Components\Badge
+ * @link https://mantine.dev/core/badge/
+ */
 class ExampleBadge extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic badge with color
+     * 2. Different visual variants (filled, light, outline, etc.)
+     * 3. Gradient badge with custom colors
+     * 4. Circular number badges
+     * 5. Badges with left/right sections
+     * 6. Full width badge
+     * 7. Auto contrast functionality
+     * 8. Badge as a clickable link
+     *
+     * Each example showcases different features and customization
+     * options available with the Badge component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

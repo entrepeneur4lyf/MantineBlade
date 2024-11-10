@@ -4,8 +4,47 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Carousel Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Carousel component.
+ * It showcases different layouts, animations, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic carousel usage
+ * - Custom slide sizes and gaps
+ * - Responsive configurations
+ * - Drag-free sliding
+ * - Vertical orientation
+ * - Custom control icons
+ * - Image carousels
+ * - Autoplay functionality
+ * - Embla API integration
+ *
+ * @see \MantineBlade\Components\Carousel
+ * @link https://mantine.dev/core/carousel/
+ */
 class ExampleCarousel extends Component
 {
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic carousel with indicators
+     * 2. Custom slide size and gap
+     * 3. Responsive slide configurations
+     * 4. Drag-free sliding behavior
+     * 5. Vertical orientation
+     * 6. Custom navigation controls
+     * 7. Image carousel implementation
+     * 8. Autoplay functionality
+     * 9. Embla API integration with progress
+     *
+     * Each example showcases different features and customization
+     * options available with the Carousel component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

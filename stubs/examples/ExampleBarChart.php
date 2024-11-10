@@ -4,8 +4,38 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example BarChart Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade BarChart component.
+ * It showcases different chart types, data visualizations, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic bar chart
+ * - Stacked bar chart
+ * - Mixed stacked bar chart
+ * - Percentage-based bar chart
+ * - Waterfall chart
+ * - Legend customization
+ * - Value formatting
+ * - Reference lines
+ * - Axis labels
+ * - Bar value labels
+ * - Vertical orientation
+ *
+ * @see \MantineBlade\Components\BarChart
+ * @link https://mantine.dev/charts/bar-chart/
+ */
 class ExampleBarChart extends Component
 {
+    /**
+     * Sample data for multi-series charts
+     *
+     * Contains monthly sales data for different product categories,
+     * demonstrating how to structure data for various chart types.
+     *
+     * @var array
+     */
     public $data = [
         ['month' => 'January', 'Smartphones' => 1200, 'Laptops' => 900, 'Tablets' => 400],
         ['month' => 'February', 'Smartphones' => 1900, 'Laptops' => 1200, 'Tablets' => 200],
@@ -15,6 +45,14 @@ class ExampleBarChart extends Component
         ['month' => 'June', 'Smartphones' => 900, 'Laptops' => 1200, 'Tablets' => 200],
     ];
 
+    /**
+     * Sample data for waterfall chart
+     *
+     * Contains data points that show cumulative changes,
+     * perfect for demonstrating waterfall chart capabilities.
+     *
+     * @var array
+     */
     public $waterfallData = [
         ['item' => 'Tax Rate', 'value' => 70],
         ['item' => 'Perm. diff.', 'value' => -20, 'color' => 'red'],
@@ -23,6 +61,27 @@ class ExampleBarChart extends Component
         ['item' => 'ETR', 'value' => 21, 'standalone' => true],
     ];
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic bar chart with multiple series
+     * 2. Stacked bar chart showing cumulative values
+     * 3. Mixed stacked bar chart with different stack groups
+     * 4. Percentage-based bar chart
+     * 5. Waterfall chart for showing progressive changes
+     * 6. Chart with legend in different positions
+     * 7. Custom value formatting
+     * 8. Bar value labels
+     * 9. Axis labels for better context
+     * 10. Reference lines for thresholds
+     * 11. Vertical orientation option
+     *
+     * Each example showcases different features and customization
+     * options available with the BarChart component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'

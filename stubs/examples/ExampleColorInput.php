@@ -4,92 +4,155 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example ColorInput Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade ColorInput component.
+ * It showcases different formats, swatches, and customization options through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic color input
+ * - Different color formats
+ * - Predefined swatches
+ * - Color picker integration
+ * - Error states
+ * - Size variations
+ * - Eye dropper functionality
+ * - Custom styling
+ *
+ * @see \MantineBlade\Components\ColorInput
+ * @link https://mantine.dev/core/color-input/
+ */
 class ExampleColorInput extends Component
 {
+    /**
+     * Selected color value
+     *
+     * @var string|null
+     */
     public ?string $color = null;
-    public ?string $format = 'hex';
-    public array $swatches = [
-        '#2e2e2e', '#868e96', '#fa5252', '#e64980', '#be4bdb',
-        '#7950f2', '#4c6ef5', '#228be6', '#15aabf', '#12b886',
-        '#40c057', '#82c91e', '#fab005', '#fd7e14'
-    ];
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic color input with hex format
+     * 2. Different color formats (rgba, rgb, hsl)
+     * 3. Predefined color swatches
+     * 4. Color picker integration
+     * 5. Error and disabled states
+     * 6. Size variations
+     * 7. Eye dropper functionality
+     * 8. Custom styling options
+     *
+     * Each example showcases different features and customization
+     * options available with the ColorInput component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'
             <div>
-                <!-- Basic color input -->
+                <!-- Basic usage -->
                 <x-mantine-color-input
-                    label="Pick color"
+                    label="Pick a color"
                     placeholder="Pick color"
-                    wire:model.live="color"
-                />
-
-                <!-- With description and error -->
-                <x-mantine-color-input
-                    label="With description and error"
-                    description="Choose your favorite color"
-                    error="This color is not allowed"
-                    class="mt-4"
+                    format="hex"
                 />
 
                 <!-- Different formats -->
-                <x-mantine-color-input
-                    label="Color format"
-                    :format="$format"
-                    class="mt-4"
-                />
+                <div class="mt-4">
+                    <x-mantine-stack>
+                        <x-mantine-color-input
+                            label="HEX color"
+                            placeholder="#FFFFFF"
+                            format="hex"
+                        />
+                        <x-mantine-color-input
+                            label="RGBA color"
+                            placeholder="rgba(255, 255, 255, 1)"
+                            format="rgba"
+                        />
+                        <x-mantine-color-input
+                            label="RGB color"
+                            placeholder="rgb(255, 255, 255)"
+                            format="rgb"
+                        />
+                        <x-mantine-color-input
+                            label="HSL color"
+                            placeholder="hsl(0, 0%, 100%)"
+                            format="hsl"
+                        />
+                    </x-mantine-stack>
+                </div>
 
                 <!-- With swatches -->
-                <x-mantine-color-input
-                    label="With swatches"
-                    placeholder="Pick from predefined colors"
-                    :swatches="$swatches"
-                    :swatches-per-row="7"
-                    class="mt-4"
-                />
+                <div class="mt-4">
+                    <x-mantine-color-input
+                        label="With swatches"
+                        placeholder="Pick color"
+                        :swatches="[
+                            '#25262b', '#868e96', '#fa5252', '#e64980', '#be4bdb',
+                            '#7950f2', '#4c6ef5', '#228be6', '#15aabf', '#12b886',
+                        ]"
+                        :swatches-per-row="5"
+                        format="hex"
+                    />
+                </div>
 
-                <!-- Restricted to swatches -->
-                <x-mantine-color-input
-                    label="Restricted to swatches"
-                    placeholder="Only predefined colors"
-                    :swatches="$swatches"
-                    :disallow-input="true"
-                    :with-picker="false"
-                    class="mt-4"
-                />
+                <!-- With color picker -->
+                <div class="mt-4">
+                    <x-mantine-color-input
+                        label="With color picker"
+                        placeholder="Pick color"
+                        :with-picker="true"
+                        format="rgba"
+                    />
+                </div>
 
-                <!-- Without eye dropper -->
-                <x-mantine-color-input
-                    label="Without eye dropper"
-                    placeholder="No eye dropper"
-                    :with-eye-dropper="false"
-                    class="mt-4"
-                />
+                <!-- With error state -->
+                <div class="mt-4">
+                    <x-mantine-color-input
+                        label="With error"
+                        placeholder="Pick color"
+                        error="Invalid color"
+                        format="hex"
+                    />
+                </div>
 
-                <!-- Custom eye dropper icon -->
-                <x-mantine-color-input
-                    label="Custom eye dropper icon"
-                    placeholder="With custom icon"
-                    :eye-dropper-icon='<svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2L2 12l10 10 10-10z"/></svg>'
-                    class="mt-4"
-                />
+                <!-- Different sizes -->
+                <div class="mt-4">
+                    <x-mantine-group align="end">
+                        <x-mantine-color-input size="xs" label="xs" />
+                        <x-mantine-color-input size="sm" label="sm" />
+                        <x-mantine-color-input size="md" label="md" />
+                        <x-mantine-color-input size="lg" label="lg" />
+                        <x-mantine-color-input size="xl" label="xl" />
+                    </x-mantine-group>
+                </div>
 
-                <!-- Read only -->
-                <x-mantine-color-input
-                    label="Read only"
-                    :read-only="true"
-                    :default-value="'#F0FCFE'"
-                    class="mt-4"
-                />
+                <!-- With eye dropper -->
+                <div class="mt-4">
+                    <x-mantine-color-input
+                        label="With eye dropper"
+                        placeholder="Pick color"
+                        :eye-dropper-button-props="[
+                            'title' => 'Open eye dropper',
+                        ]"
+                    />
+                </div>
 
-                <!-- Disabled -->
-                <x-mantine-color-input
-                    label="Disabled"
-                    :disabled="true"
-                    placeholder="Cannot pick color"
-                    class="mt-4"
-                />
+                <!-- Controlled input -->
+                <div class="mt-4">
+                    <x-mantine-color-input
+                        wire:model.live="color"
+                        label="Controlled input"
+                        placeholder="Pick color"
+                        format="hex"
+                    />
+                    <x-mantine-text mt="sm">Selected color: {{ $color ?? 'none' }}</x-mantine-text>
+                </div>
             </div>
         blade;
     }

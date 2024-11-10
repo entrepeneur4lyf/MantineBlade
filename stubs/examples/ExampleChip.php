@@ -4,11 +4,57 @@ namespace App\View\Components;
 
 use Livewire\Component;
 
+/**
+ * Example Chip Component
+ *
+ * This example demonstrates various use cases and configurations of the MantineBlade Chip component.
+ * It showcases different selection modes, styles, and interactive features through practical examples.
+ *
+ * Features demonstrated:
+ * - Basic chip usage
+ * - Different variants
+ * - Single selection groups
+ * - Multiple selection groups
+ * - Custom icons
+ * - State management
+ * - Disabled states
+ *
+ * @see \MantineBlade\Components\Chip
+ * @link https://mantine.dev/core/chip/
+ */
 class ExampleChip extends Component
 {
+    /**
+     * Value for single selection example
+     *
+     * @var string|null
+     */
     public ?string $singleValue = null;
+
+    /**
+     * Values for multiple selection example
+     *
+     * @var array
+     */
     public array $multipleValues = [];
 
+    /**
+     * Render the component
+     *
+     * Demonstrates:
+     * 1. Basic chip with default state
+     * 2. Different visual variants
+     * 3. Single selection chip group
+     * 4. Multiple selection chip group
+     * 5. Custom icon integration
+     * 6. Disabled states
+     * 7. State management with Livewire
+     *
+     * Each example showcases different features and customization
+     * options available with the Chip component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
         return <<<'blade'
