@@ -2,10 +2,71 @@
 
 namespace MantineBlade\Components;
 
+/**
+ * NavLink component for creating navigation links with various styling options.
+ *
+ * The NavLink component is designed for navigation menus and sidebars, providing
+ * a consistent look and feel with support for icons, descriptions, and nested navigation.
+ *
+ * @see https://mantine.dev/core/nav-link/
+ *
+ * @example Basic usage
+ * ```blade
+ * <x-mantine-nav-link
+ *     label="Dashboard"
+ *     :left-section="'🏠'"
+ *     href="/dashboard"
+ *     :active="request()->is('dashboard')"
+ * />
+ * ```
+ *
+ * @example With description and sections
+ * ```blade
+ * <x-mantine-nav-link
+ *     label="Settings"
+ *     description="Manage your preferences"
+ *     :left-section="'⚙️'"
+ *     :right-section="'→'"
+ *     :variant="'filled'"
+ *     :color="'blue'"
+ * />
+ * ```
+ *
+ * @example Nested navigation
+ * ```blade
+ * <x-mantine-nav-link
+ *     label="User Management"
+ *     :default-opened="true"
+ *     :children-offset="12"
+ * >
+ *     <x-mantine-nav-link label="Users" href="/users" />
+ *     <x-mantine-nav-link label="Roles" href="/roles" />
+ * </x-mantine-nav-link>
+ * ```
+ */
 class NavLink extends MantineComponent
 {
     /**
-     * Create a new component instance.
+     * Create a new NavLink component instance.
+     *
+     * @param mixed $label Text content of the link
+     * @param mixed $description Additional description below the label
+     * @param mixed $leftSection Content displayed on the left side
+     * @param mixed $rightSection Content displayed on the right side
+     * @param mixed $active Determines if the link is currently active
+     * @param mixed $variant Visual variant of the link ('subtle', 'light', 'filled')
+     * @param mixed $color Color from theme or CSS color value
+     * @param mixed $autoContrast Automatically set color contrast
+     * @param mixed $disabled Disables the link
+     * @param mixed $childrenOffset Left padding for nested items in px
+     * @param mixed $defaultOpened Initial opened state for links with children
+     * @param mixed $opened Controlled opened state
+     * @param mixed $onChange Called when opened state changes
+     * @param mixed $onClick Called when the link is clicked
+     * @param mixed $component Override component element type
+     * @param mixed $href URL the link points to
+     * @param mixed $target Link target attribute
+     * @param mixed $rel Link rel attribute
      */
     public function __construct(
         public mixed $label = null,
