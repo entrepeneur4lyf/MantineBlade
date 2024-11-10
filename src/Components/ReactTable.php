@@ -3,21 +3,54 @@
 namespace MantineBlade\Components;
 
 /**
- * Mantine React Table Component
+ * Advanced data table component with rich features and interactivity.
  *
- * A feature-rich table and data grid component built on top of TanStack Table V8 and Mantine V7.
- * Provides functionality for sorting, filtering, pagination, selection, and more.
+ * The ReactTable component provides a powerful data grid implementation with features
+ * like sorting, filtering, pagination, and row selection. Built on top of TanStack Table V8
+ * and integrated with Mantine's design system.
  *
- * @property array $data The data to display in the table
- * @property array $columns Column definitions for the table
- * @property bool $enableColumnFiltering Enable column filtering UI and functionality
- * @property bool $enableColumnOrdering Enable column reordering via drag and drop
- * @property bool $enableColumnPinning Enable column pinning (freezing)
- * @property bool $enableRowSelection Enable row selection with checkboxes
- * @property bool $enablePagination Enable pagination controls
- * @property bool $enableSorting Enable column sorting
- * @property mixed $onRowSelectionChange Callback fired when row selection changes
- * @property string $state Initial state for controlled tables
+ * @see https://tanstack.com/table/v8/docs/guide/introduction
+ *
+ * @example Basic usage with simple data
+ * ```blade
+ * <x-mantine-react-table
+ *     :data="[
+ *         ['name' => 'John', 'age' => 25],
+ *         ['name' => 'Jane', 'age' => 30],
+ *     ]"
+ *     :columns="[
+ *         ['accessorKey' => 'name', 'header' => 'Name'],
+ *         ['accessorKey' => 'age', 'header' => 'Age'],
+ *     ]"
+ * />
+ * ```
+ *
+ * @example Advanced table with features enabled
+ * ```blade
+ * <x-mantine-react-table
+ *     :data="$users"
+ *     :columns="$columns"
+ *     :enable-column-filtering="true"
+ *     :enable-sorting="true"
+ *     :enable-pagination="true"
+ *     :enable-row-selection="true"
+ *     :on-row-selection-change="$handleSelectionChange"
+ * />
+ * ```
+ *
+ * @example Controlled state with custom configuration
+ * ```blade
+ * <x-mantine-react-table
+ *     :data="$data"
+ *     :columns="$columns"
+ *     :state="[
+ *         'sorting' => [['id' => 'name', 'desc' => false]],
+ *         'pagination' => ['pageIndex' => 0, 'pageSize' => 10],
+ *     ]"
+ *     :enable-column-ordering="true"
+ *     :enable-column-pinning="true"
+ * />
+ * ```
  */
 class ReactTable extends MantineComponent
 {
