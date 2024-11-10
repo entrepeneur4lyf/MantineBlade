@@ -58,10 +58,11 @@ use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\Attributes\Reactive;
 use MantineBlade\Traits\WithTableHooks;
+use MantineBlade\Traits\WithMantineHooks;
 
 class ReactTable extends Component
 {
-    use WithTableHooks;
+    use WithTableHooks, WithMantineHooks;
     /**
      * Default table feature configuration
      * 
@@ -231,8 +232,9 @@ class ReactTable extends Component
             ]
         );
 
-        // Execute after mount hooks
+        // Execute hooks
         $this->executeHooks('afterMount');
+        $this->executeMantineHooks('Mount');
     }
 
     /**
