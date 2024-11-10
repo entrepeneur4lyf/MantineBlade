@@ -74,6 +74,24 @@ class Accordion extends MantineComponent
      * @param mixed $classNames Custom class names
      * @param mixed $styles Custom styles
      */
+    /**
+     * Create a new component instance.
+     *
+     * @param mixed $value Current controlled value
+     * @param mixed $defaultValue Default value for uncontrolled state
+     * @param mixed $onChange Callback fired when value changes
+     * @param mixed $multiple Allow multiple items to be opened
+     * @param mixed $variant Visual variant of the accordion
+     * @param mixed $radius Border radius value
+     * @param mixed $chevronPosition Position of chevron
+     * @param mixed $disableChevronRotation Disable chevron animation
+     * @param mixed $chevron Custom chevron icon
+     * @param mixed $order Heading level for controls (2-6)
+     * @param mixed $transitionDuration Animation duration
+     * @param mixed $unstyled Remove default styles
+     * @param mixed $classNames Custom class names
+     * @param mixed $styles Custom styles
+     */
     public function __construct(
         public mixed $value = null,
         public mixed $defaultValue = null,
@@ -92,6 +110,11 @@ class Accordion extends MantineComponent
     ) {
         parent::__construct();
 
+        // Validate order is between 2-6 if provided
+        if ($this->order !== null) {
+            $this->order = max(2, min(6, (int)$this->order));
+        }
+
         $this->props = [
             'value' => $value,
             'defaultValue' => $defaultValue,
@@ -102,7 +125,7 @@ class Accordion extends MantineComponent
             'chevronPosition' => $chevronPosition,
             'disableChevronRotation' => $disableChevronRotation,
             'chevron' => $chevron,
-            'order' => $order,
+            'order' => $this->order,
             'transitionDuration' => $transitionDuration,
             'unstyled' => $unstyled,
             'classNames' => $classNames,
