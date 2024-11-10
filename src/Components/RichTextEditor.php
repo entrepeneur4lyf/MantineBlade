@@ -81,20 +81,8 @@ class RichTextEditor extends MantineComponent
     ) {
         parent::__construct();
 
-        // Initialize Tiptap editor if content is provided
-        if ($this->content) {
-            $tiptap = new \Tiptap\Editor();
-            
-            // Sanitize content if requested
-            if ($this->sanitize) {
-                $this->content = $tiptap->sanitize($this->content);
-            }
-
-            // Convert HTML to Tiptap JSON if HTML content provided
-            if (is_string($this->content) && str_contains($this->content, '<')) {
-                $this->content = $tiptap->setContent($this->content)->getDocument();
-            }
-        }
+        // Content handling is managed by TipTap React on the client side
+        $this->content = $content;
 
         $this->props = [
             'editor' => $editor,
