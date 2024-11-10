@@ -59,6 +59,7 @@ trait WithMantineHooks
      * Execute Mantine hooks for a given lifecycle event
      */
     protected array $mantineHooks = [];
+    protected array $mantineHookConfigs = [];
 
     protected function executeMantineHooks(string $type, mixed ...$args): void
     {
@@ -71,11 +72,29 @@ trait WithMantineHooks
     }
 
     /**
-     * Register a Mantine hook
+     * Register a Mantine hook with configuration
      */
-    protected function registerHook(string $hookName, array $config = []): void
+    protected function registerHook(string $hookName, array $config = [], ?string $handler = null): void
     {
-        $this->mantineHooks[$hookName] = $config;
+        $this->mantineHooks[$hookName] = true;
+        $this->mantineHookConfigs[$hookName] = array_merge(
+            $config,
+            $handler ? ['handler' => $handler] : []
+        );
+    }
+
+    /**
+     * Register a generic Mantine hook handler
+     */
+    public function useHook(string $hookName, ?array $config = null, ?callable $handler = null): self
+    {
+        if ($handler) {
+            $handlerName = 'handle' . ucfirst($hookName);
+            $this->{$handlerName} = $handler;
+        }
+        
+        $this->registerHook($hookName, $config ?? [], $handler ? $handlerName : null);
+        return $this;
     }
 
     /**
