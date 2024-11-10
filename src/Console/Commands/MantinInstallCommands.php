@@ -194,16 +194,14 @@ class MantineInstallCommand extends Command
         $content = preg_replace(
             '/plugins:\s*\[(.*?)\]/s',
             'plugins: [
-        react(),
-        laravel({
-            input: [
-                \'resources/js/app.js\',
-                \'resources/css/app.css\',
-                ...mingles.map(mingle => `resources/js/${mingle.input}.js`),
-            ],
-            refresh: true,
-        }),
-    ]',
+                react(),
+                laravel({
+                    input: [
+                        ...mingles,
+                    ],
+                    refresh: true,
+                }),
+            ]',
             $content
         );
 
@@ -255,21 +253,21 @@ class MantineInstallCommand extends Command
     protected function getPostCssConfig(): string
     {
         return <<<'JS'
-module.exports = {
-    plugins: {
-        'postcss-preset-mantine': {},
-        'postcss-simple-vars': {
-            variables: {
-                'mantine-breakpoint-xs': '36em',
-                'mantine-breakpoint-sm': '48em',
-                'mantine-breakpoint-md': '62em',
-                'mantine-breakpoint-lg': '75em',
-                'mantine-breakpoint-xl': '88em',
-            },
-        },
-    },
-};
-JS;
+            module.exports = {
+                plugins: {
+                    'postcss-preset-mantine': {},
+                    'postcss-simple-vars': {
+                        variables: {
+                            'mantine-breakpoint-xs': '36em',
+                            'mantine-breakpoint-sm': '48em',
+                            'mantine-breakpoint-md': '62em',
+                            'mantine-breakpoint-lg': '75em',
+                            'mantine-breakpoint-xl': '88em',
+                        },
+                    },
+                },
+            };
+            JS;
     }
 
     protected function askForPackageInstaller(): string
