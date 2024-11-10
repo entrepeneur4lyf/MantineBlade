@@ -57,8 +57,11 @@ use Illuminate\Support\Collection;
  */
 use Livewire\Component;
 use Livewire\Attributes\Reactive;
+use MantineBlade\Traits\WithTableHooks;
 
 class ReactTable extends Component
+{
+    use WithTableHooks;
 {
     /**
      * Default table feature configuration
@@ -188,6 +191,8 @@ class ReactTable extends Component
     public array|null $columns = null;
 
     public function mount(
+        // Execute before mount hooks
+        $this->executeHooks('beforeMount');
         array|Collection|null $data = null,
         array|null $columns = null,
         ?array $features = null,
@@ -241,6 +246,9 @@ class ReactTable extends Component
                 'onRowExpansionChange' => fn($expansion) => $this->dispatch('table-event', ['type' => 'rowExpansion', 'data' => $expansion]),
             ]
         );
+
+        // Execute after mount hooks
+        $this->executeHooks('afterMount');
     }
 
     /**
