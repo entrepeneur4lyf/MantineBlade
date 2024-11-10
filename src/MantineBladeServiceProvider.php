@@ -24,6 +24,14 @@ class MantineBladeServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register React refresh in local development
+        if ($this->app->environment('local')) {
+            \Filament\Support\Facades\FilamentView::registerRenderHook(
+                'panels::head.start',
+                fn() => app(\Illuminate\Foundation\Vite::class)->reactRefresh()
+            );
+        }
+
         // Commands
         if ($this->app->runningInConsole()) {
             $this->commands([
