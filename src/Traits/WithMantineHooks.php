@@ -68,13 +68,6 @@ trait WithMantineHooks
         }
     }
 }
-<?php
-
-namespace MantineBlade\Traits;
-
-trait WithMantineHooks
-{
-    protected array $mantineHooks = [];
     
     /**
      * Register a Mantine hook
