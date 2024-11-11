@@ -65,6 +65,88 @@ class RichTextEditor extends MantineComponent
         public mixed $enableMentions = false,
         public mixed $enableTasks = false,
         public mixed $enableTables = false,
+<<<<<<< HEAD
+        public mixed $tableFeatures = [
+            // Column Features
+            'enableColumnFiltering' => true,
+            'enableColumnFilterModes' => true,
+            'enableColumnOrdering' => true,
+            'enableColumnPinning' => true,
+            'enableColumnResizing' => true,
+            'enableColumnActions' => true,
+            'enableColumnDragging' => true,
+            'enableColumnVirtualization' => true,
+            'enableHiding' => true,
+            'enableMultiSort' => true,
+
+            // Row Features  
+            'enableRowSelection' => true,
+            'enableRowPinning' => true,
+            'enableRowNumbers' => true,
+            'enableRowActions' => true,
+            'enableRowDragging' => true,
+            'enableRowVirtualization' => true,
+            'enableSubRowSelection' => true,
+            'enableClickToCopy' => true,
+            'enableStriped' => true,
+
+            // Toolbar Features
+            'enableTopToolbar' => true,
+            'enableBottomToolbar' => true,
+            'enableToolbarInternalActions' => true,
+            'enableDensityToggle' => true,
+            'enableFullScreenToggle' => true,
+            'enableGlobalFilter' => true,
+            'enableGlobalFilterModes' => true,
+            'enableGlobalFilterRankedResults' => true,
+
+            // Pagination Features
+            'enablePagination' => true,
+            'paginateExpandedRows' => true,
+            'manualPagination' => false,
+
+            // Grouping & Expanding Features
+            'enableGrouping' => true,
+            'enableExpandAll' => true,
+            'enableExpanding' => true,
+            'manualGrouping' => false,
+            'manualExpanding' => false,
+
+            // Filtering Features
+            'enableFilters' => true,
+            'enableFacetedValues' => true,
+            'enableFilterMatchHighlighting' => true,
+            'manualFiltering' => false,
+
+            // Sorting Features
+            'enableSorting' => true,
+            'enableMultiRemove' => true,
+            'enableSortingRemoval' => true,
+            'manualSorting' => false,
+            'sortDescFirst' => false,
+
+            // Selection Features
+            'enableSelectAll' => true,
+            'enableMultiRowSelection' => true,
+            'selectDisplayMode' => 'checkbox',
+            'selectAllMode' => 'page',
+
+            // Layout Features
+            'enableStickyHeader' => true,
+            'enableStickyFooter' => true,
+            'enableTableFooter' => true,
+            'enableTableHead' => true,
+            'layoutMode' => 'semantic',
+
+            // Debug Features
+            'debugAll' => false,
+            'debugTable' => false,
+            'debugHeaders' => false,
+            'debugColumns' => false,
+            'debugRows' => false
+        ],
+=======
+>>>>>>> parent of a918c08 (feat: Add comprehensive table features to RichTextEditor component)
         public mixed $enableFontFamily = false,
         public mixed $enableBubbleMenu = false,
         public mixed $enableFloatingMenu = false,
