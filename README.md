@@ -1,3 +1,5 @@
+# WARNING!!! I AM MAKING THIS REPO PUBLIC FOR PATRICIO BUT NONE OF THE HOOKS ARE IMPLEMENTED !!!
+
 # MantineBlade
 
 A Laravel Livewire 3 component library based on Mantine UI, with React integration using Mingle.
